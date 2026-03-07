@@ -1,7 +1,7 @@
 {
   "name": "auramind",
   "compatibility_date": "2025-09-27",
-  "workers_dev": false,
+  "workers_dev": true,
   "assets": {
     "directory": "."
   },

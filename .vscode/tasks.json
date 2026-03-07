@@ -5,7 +5,7 @@
       "label": "Start Dev Server (Interactive Preview)",
       "type": "shell",
       "command": "npx",
-      "args": ["serve", ".", "-p", "3000"],
+      "args": ["serve", ".", "-p", "3000", "-s"],
       "options": {
         "cwd": "${workspaceFolder}",
         "env": {}
