@@ -1,10 +1,8 @@
 {
   "name": "auramind",
+  "main": "worker.js",
   "compatibility_date": "2025-09-27",
   "workers_dev": true,
-  "assets": {
-    "directory": "."
-  },
   "observability": {
     "enabled": true
   }
