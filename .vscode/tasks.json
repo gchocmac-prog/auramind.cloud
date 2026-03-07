@@ -4,8 +4,8 @@
     {
       "label": "Start Dev Server (Interactive Preview)",
       "type": "shell",
-      "command": "npx",
-      "args": ["serve", ".", "-p", "3000", "-s"],
+      "command": "node",
+      "args": ["proxy.js"],
       "options": {
         "cwd": "${workspaceFolder}",
         "env": {}
@@ -17,7 +17,7 @@
         },
         "background": {
           "activeOnStart": true,
-          "beginsPattern": "Serving|Local:|localhost",
+          "beginsPattern": "Proxying|Serving|Local:|localhost",
           "endsPattern": ".*"
         }
       },
