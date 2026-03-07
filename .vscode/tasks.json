@@ -4,8 +4,8 @@
     {
       "label": "Start Dev Server (Interactive Preview)",
       "type": "shell",
-      "command": "node",
-      "args": ["proxy.js"],
+      "command": "npx",
+      "args": ["serve", ".", "-p", "3000", "-s"],
       "options": {
         "cwd": "${workspaceFolder}",
         "env": {}
