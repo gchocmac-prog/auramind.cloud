@@ -3,7 +3,7 @@
   "compatibility_date": "2025-09-27",
   "workers_dev": true,
   "assets": {
-    "directory": "."
+    "directory": "site/auramind.cloud"
   },
   "observability": {
     "enabled": true

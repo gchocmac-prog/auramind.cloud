@@ -1,0 +1,26 @@
+{
+  "name": "auramind.cloud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "proxy.js",
+  "devDependencies": {
+    "website-scraper": "^6.0.0"
+  },
+  "scripts": {
+    "scrape": "node scrape-site.mjs",
+    "serve": "node serve.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gchocmac-prog/auramind.cloud.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gchocmac-prog/auramind.cloud/issues"
+  },
+  "homepage": "https://github.com/gchocmac-prog/auramind.cloud#readme"
+}
