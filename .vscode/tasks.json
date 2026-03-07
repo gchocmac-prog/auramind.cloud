@@ -5,7 +5,7 @@
       "label": "Start Dev Server (Interactive Preview)",
       "type": "shell",
       "command": "npx",
-      "args": ["serve", ".", "-p", "3000", "-s"],
+      "args": ["wrangler", "dev", "--port", "3000"],
       "options": {
         "cwd": "${workspaceFolder}",
         "env": {}
@@ -17,7 +17,7 @@
         },
         "background": {
           "activeOnStart": true,
-          "beginsPattern": "Proxying|Serving|Local:|localhost",
+          "beginsPattern": "Ready on|Local:|localhost|http://",
           "endsPattern": ".*"
         }
       },
