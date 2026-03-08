@@ -98,6 +98,18 @@ body.page-id-146 .elementor-element-75f67604 {
   background: none !important;
 }
 
+/* Hero section: title and text white in all browsers (home + services) */
+.elementor-element-esfbvho7 .elementor-heading-title,
+.elementor-element-esfbvho7 .elementor-widget-container,
+.elementor-element-8l02zu5w .elementor-heading-title,
+.elementor-element-8l02zu5w .elementor-widget-container {
+  color: #ffffff !important;
+}
+.elementor-element-esfbvho7 .elementor-widget-container a:not(.elementor-button):not(.twbb_cta-button),
+.elementor-element-8l02zu5w .elementor-widget-container a:not(.elementor-button):not(.twbb_cta-button) {
+  color: #ffffff !important;
+}
+
 /* Services hero: contextual background – override theme black */
 .elementor-element-8l02zu5w,
 .elementor-element-8l02zu5w::before,
@@ -610,6 +622,12 @@ nav.twbb-nav-menu__container a,
 }
 
 /* All service cards (home + Services page): same title and description font sizes + aligned text */
+/* Single font size for every CTA card title site-wide (homepage 4 cards + Services page) */
+.twbb_cta-wrapper .twbb_cta-title {
+  font-size: 1.15rem !important;
+  line-height: 1.35 !important;
+  font-weight: 700 !important;
+}
 .elementor-element-mpmj2ts1 .twbb_cta-content-wrapper,
 .elementor-element-mpmj2ts1 .twbb_cta-content-inner,
 .elementor-element-wmfsh7gq .twbb_cta-content-wrapper,
