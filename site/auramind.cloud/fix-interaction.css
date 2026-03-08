@@ -180,6 +180,13 @@ body.page-id-145 .elementor-element-7f979378 .elementor-widget-wrap {
   }
 }
 
+/* Same light grey band below nav as About Us: About Us, Blog (Contact Us: no grey) */
+.elementor-element-w7s5qsz9,
+body.page-id-147 .elementor-element-huaaxvrj {
+  background: linear-gradient(180deg, #f8f8f8 0%, #f0f0f0 100%) !important;
+  background-color: #f5f5f5 !important;
+}
+
 /* Site-wide: geometric cube pattern background, half transparent */
 body {
   position: relative;
@@ -286,6 +293,7 @@ body::before {
   flex-direction: column !important;
   flex: 1 !important;
   min-height: 0 !important;
+  padding-top: 1rem !important;
 }
 .elementor-element-wmfsh7gq .twbb_cta-button-wrapper {
   margin-top: auto !important;
@@ -332,19 +340,24 @@ body::before {
   border-color: rgba(255, 255, 255, 0.8) !important;
   color: #fff !important;
 }
-/* Hide broken/placeholder image icons in card image area */
+/* Fixed image height so card titles align evenly across the 2x2 grid */
 .elementor-element-wmfsh7gq .twbb_cta-image-background-wrapper {
-  min-height: 160px !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
+  flex-shrink: 0 !important;
 }
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag {
   overflow: hidden !important;
   background: rgba(0, 0, 0, 0.3) !important;
-  min-height: 160px !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
 }
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag img {
   width: 100% !important;
   height: 100% !important;
-  min-height: 160px !important;
+  min-height: 200px !important;
   object-fit: cover !important;
   display: block !important;
   vertical-align: middle !important;
@@ -372,6 +385,10 @@ body.page-id-148 .elementor-element-7blqyvt1 {
 body.page-id-148 .elementor-invisible {
   visibility: visible !important;
   opacity: 1 !important;
+}
+/* Contact Us (FAQs) page: hide broken footer logo image (external auramind-logo.png) */
+body.page-id-148 .elementor-element-w1qkqj8t {
+  display: none !important;
 }
 
 /* Footer: hide Services, About Us, Blog links (all pages) */
