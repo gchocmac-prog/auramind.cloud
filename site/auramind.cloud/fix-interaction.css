@@ -1,0 +1,559 @@
+/* fix-interaction.css – cross-browser compatible for Chrome, Firefox, Safari, Edge.
+   Fallbacks: min() has fallback; :has() has body.page-id-147 fallback for blog; mask uses -webkit- prefix. */
+
+/* Site-wide: show content when animation JS doesn't run (e.g. Chrome/Firefox with blocked/404 scripts) */
+.elementor-invisible,
+body .elementor-element.elementor-invisible,
+.elementor .elementor-invisible {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Header logo: always show and link to home when img is placeholder or 404 (Chrome/Firefox) */
+.elementor-element-e1q9sn27 .elementor-widget-container a {
+  display: block !important;
+  min-height: 60px !important;
+  background: url(/assets/logo-header.jpg) no-repeat left center !important;
+  background-size: contain !important;
+}
+.elementor-element-e1q9sn27 .elementor-widget-container img:not([src^="/assets/"]) {
+  opacity: 0 !important;
+  position: absolute !important;
+  pointer-events: none !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 60px !important;
+}
+.elementor-element-e1q9sn27 .elementor-widget-container img[src^="/assets/logo-header"] {
+  opacity: 1 !important;
+  position: relative !important;
+}
+
+/* About Us: force Get in touch section visible (Chrome/Firefox when JS fails) */
+body.page-id-146 .elementor-element-511b4394,
+body.page-id-146 .elementor-element-3073f3ae,
+body.page-id-146 .elementor-element-75f67604 {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Homepage & Blog: force main content sections visible (Discover, Explore, Tech news) */
+.elementor-element-oytpz3n0,
+.elementor-element-ydahyccf,
+.elementor-element-mpmj2ts1,
+.elementor-element-09r9ewp1,
+.elementor-element-62omublh {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.elementor-element-oytpz3n0 .e-con-inner,
+.elementor-element-ydahyccf .e-con-inner,
+.elementor-element-mpmj2ts1 .e-con-inner,
+.elementor-element-09r9ewp1 .e-con-inner,
+.elementor-element-62omublh .e-con-inner {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Site-wide: geometric cube pattern background, half transparent */
+body {
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(assets/pattern-bg.png);
+  background-repeat: repeat;
+  background-size: auto;
+  filter: grayscale(100%);
+  opacity: 0.025;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Site-wide: all cards white background */
+.twbb_cta-wrapper,
+.elementor-posts-container .elementor-post,
+.elementor-posts-container .twbb-news-card,
+.twbb-whats-new-card {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+}
+
+/* Services page: Discover the Benefits section - show all 4 cards, make cards wider */
+.elementor-element-wmfsh7gq {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 1.5rem !important;
+  width: 100% !important;
+}
+.elementor-element-wmfsh7gq > .elementor-element {
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+/* Ensure all 4 cards are visible (new cards may lack data-id so animation never runs) */
+.elementor-element-wmfsh7gq .elementor-invisible {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+@media (max-width: 768px) {
+  .elementor-element-wmfsh7gq {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Discover the Benefits cards: same format for every card */
+.elementor-element-wmfsh7gq .elementor-element > .elementor-widget-container {
+  display: flex !important;
+  flex: 1 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+.elementor-element-wmfsh7gq .twbb_cta-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  border: 1px solid #3d3d3d !important;
+  border-radius: 6px !important;
+}
+.elementor-element-wmfsh7gq .twbb_cta-content-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+.elementor-element-wmfsh7gq .twbb_cta-button-wrapper {
+  margin-top: auto !important;
+}
+/* Same title size and line clamp (-webkit for Safari/Chrome, overflow fallback for others) */
+.elementor-element-wmfsh7gq .twbb_cta-title {
+  font-size: 1.15rem !important;
+  line-height: 1.35 !important;
+  margin: 0 0 0.75rem 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+/* Same description font size and area so button aligns */
+.elementor-element-wmfsh7gq .twbb_cta-description {
+  font-size: 0.9375rem !important;
+  line-height: 1.5 !important;
+  flex: 1 !important;
+  min-height: 3.5em !important;
+  margin-bottom: 1rem !important;
+}
+.elementor-element-wmfsh7gq .twbb_cta-description em {
+  font-size: inherit !important;
+}
+/* Same button style for all four cards */
+.elementor-element-wmfsh7gq .twbb_cta-button,
+.elementor-element-wmfsh7gq a.twbb_cta-button.elementor-button {
+  display: inline-block !important;
+  padding: 0.6em 1.2em !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  text-align: center !important;
+  border: 2px solid rgba(255, 255, 255, 0.6) !important;
+  background-color: transparent !important;
+  color: #fff !important;
+  border-radius: 4px !important;
+  text-decoration: none !important;
+  transition: background-color 0.2s, border-color 0.2s !important;
+}
+.elementor-element-wmfsh7gq .twbb_cta-button:hover,
+.elementor-element-wmfsh7gq a.twbb_cta-button.elementor-button:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  color: #fff !important;
+}
+/* Hide broken/placeholder image icons in card image area */
+.elementor-element-wmfsh7gq .twbb_cta-image-background-wrapper {
+  min-height: 160px !important;
+}
+.elementor-element-wmfsh7gq .twbb_cta-image-html-tag {
+  overflow: hidden !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  min-height: 160px !important;
+}
+.elementor-element-wmfsh7gq .twbb_cta-image-html-tag img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 160px !important;
+  object-fit: cover !important;
+  display: block !important;
+  vertical-align: middle !important;
+}
+.elementor-element-wmfsh7gq .twbb_cta-image-html-tag img.lazy:not([src*="uploads"]):not([src^="/assets"]) {
+  opacity: 0 !important;
+}
+.elementor-element-wmfsh7gq .twbb_cta-image-html-tag img[src^="data:image/svg"] {
+  opacity: 0 !important;
+  min-height: 120px !important;
+}
+
+/* FAQs page (Contact Us): hide FAQs section and welcome – show only "Need to have a word with us?" and email table */
+body.page-id-148 .elementor-element-xse7bmtm,
+body.page-id-148 .elementor-element-sagcuj9u,
+body.page-id-148 .elementor-element-cwgzm7yo {
+  display: none !important;
+}
+/* FAQs page: show main content (CTA block) without JS – override lazy animation so page is not blank */
+body.page-id-148 .elementor-element-wbjabwhb,
+body.page-id-148 .elementor-element-7blqyvt1 {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+body.page-id-148 .elementor-invisible {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Footer: hide Services, About Us, Blog links (all pages) */
+.elementor-162 .menu-item-156,
+.elementor-162 .menu-item-157,
+.elementor-162 .menu-item-158 {
+  display: none !important;
+}
+
+/* Footer: gradient at top from fully transparent to solid by 25% of footer height (webkit for Safari) */
+.elementor-element-53rhslgz {
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 25%, black 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-position: top;
+  mask-position: top;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* Fix: Enable clicks on nav, logo, and buttons (removes e--pointer-none block) */
+nav.twbb-nav-menu__container,
+nav.twbb-nav-menu__container a,
+.elementor-element-e1q9sn27 a,
+.elementor-button-wrapper a {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* FAQ section: change blue-gray background to white */
+/* Target FAQ block and its parent section (Tech news + FAQ) */
+.elementor-element-09r9ewp1,
+.elementor-element-09r9ewp1 .e-con-inner,
+.elementor-element-zka27bmd,
+.elementor-element-zka27bmd .e-con-inner,
+.elementor-element-zka27bmd .elementor-widget-wrap,
+.elementor-element-zka27bmd .elementor-widget-container,
+.elementor-element-zka27bmd::before,
+.elementor-element-zka27bmd::after {
+  background-color: #ffffff !important;
+  background: #ffffff !important;
+  background-image: none !important;
+}
+
+/* DISCOVER YOUR POTENTIAL section: center aligned */
+.elementor-element-oytpz3n0 .e-con-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.elementor-element-oytpz3n0 .elementor-element-661pu6al {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+.elementor-element-oytpz3n0 .elementor-widget-container {
+  text-align: center !important;
+}
+.elementor-element-oytpz3n0 .elementor-element-zztmxeuu {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  flex-wrap: nowrap !important;
+  gap: 2rem !important;
+  width: 100% !important;
+}
+.elementor-element-oytpz3n0 .elementor-element-zztmxeuu > .elementor-element {
+  flex: 1 1 200px !important;
+  min-width: 200px;
+  max-width: 50%;
+}
+@media (max-width: 600px) {
+  .elementor-element-oytpz3n0 .elementor-element-zztmxeuu {
+    flex-wrap: wrap !important;
+  }
+  .elementor-element-oytpz3n0 .elementor-element-zztmxeuu > .elementor-element {
+    max-width: 100% !important;
+  }
+}
+
+/* Explore Our Cutting-Edge AI Services: title centered, content below */
+.elementor-element-ydahyccf .e-con-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.elementor-element-ydahyccf .elementor-element-dy7d6jsp {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+.elementor-element-ydahyccf .elementor-element-dy7d6jsp .elementor-heading-title,
+.elementor-element-ydahyccf .elementor-element-dy7d6jsp .elementor-widget-container {
+  text-align: center !important;
+}
+.elementor-element-ydahyccf .elementor-element-mpmj2ts1 {
+  width: 100% !important;
+}
+
+/* Section 3 service cards: evenly distributed, equal height so Learn More buttons align */
+.elementor-element-mpmj2ts1 {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 1.5rem !important;
+  align-items: stretch !important;
+}
+
+.elementor-element-mpmj2ts1 > .elementor-element {
+  flex: 1 1 200px !important;
+  min-width: 200px;
+  display: flex !important;
+}
+
+.elementor-element-mpmj2ts1 > .elementor-element > .elementor-widget-container {
+  display: flex !important;
+  flex: 1 !important;
+  width: 100% !important;
+}
+
+.elementor-element-mpmj2ts1 .twbb_cta-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  width: 100% !important;
+}
+
+.elementor-element-mpmj2ts1 .twbb_cta-content-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+.elementor-element-mpmj2ts1 .twbb_cta-button-wrapper {
+  margin-top: auto !important;
+}
+
+/* TECH NEWS section: center title and description (home + blog) */
+.elementor-element-09r9ewp1 .elementor-element-ya3w1y73,
+.elementor-element-09r9ewp1 .elementor-element-m9qmfgq4,
+.elementor-element-62omublh .elementor-element-7fmml8cn,
+.elementor-element-62omublh .elementor-element-endd3yzw {
+  text-align: center !important;
+  width: 100% !important;
+}
+.elementor-element-09r9ewp1 .elementor-element-ya3w1y73 .elementor-heading-title,
+.elementor-element-09r9ewp1 .elementor-element-ya3w1y73 .elementor-widget-container,
+.elementor-element-62omublh .elementor-element-endd3yzw .elementor-heading-title,
+.elementor-element-62omublh .elementor-element-endd3yzw .elementor-widget-container {
+  text-align: center !important;
+}
+
+/* Tech news: 8 cards (home), 14 (blog), no images, dark grey border, tags, no Read more
+   :has() supported in Chrome 105+, Safari 15.4+, Firefox 121+. Fallback: blog page gets grid via body selector below. */
+.elementor-posts-container:has(.twbb-news-source) {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.elementor-posts-container:has(.twbb-news-source) .elementor-post__read-more-wrapper {
+  display: none !important;
+}
+.elementor-posts-container:has(.twbb-news-source) .twbb-news-card .elementor-post__title {
+  text-align: center !important;
+}
+.elementor-posts-container:has(.twbb-news-source) .twbb-news-tags {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.35rem !important;
+  justify-content: center !important;
+}
+.elementor-posts-container:has(.twbb-news-source) .twbb-news-tag {
+  font-size: 0.75rem !important;
+  padding: 0.2rem 0.5rem !important;
+  border-radius: 4px !important;
+  background: #e8e8e8 !important;
+  color: #333 !important;
+}
+@media (max-width: 1024px) {
+  .elementor-posts-container:has(.twbb-news-source) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .elementor-posts-container:has(.twbb-news-source) {
+    grid-template-columns: 1fr;
+  }
+}
+.elementor-posts-container:has(.twbb-news-source) .twbb-news-card {
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+.elementor-posts-container:has(.twbb-news-source) .twbb-news-card .twbb-image-container {
+  display: none !important;
+}
+
+/* Blog page: Tech news grid for more cards (e.g. 14). Fallback when :has() not supported (e.g. Firefox < 121) */
+body.page-id-147 .elementor-posts-container {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 1.25rem !important;
+}
+body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1024px) {
+  body.page-id-147 .elementor-posts-container {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  body.page-id-147 .elementor-posts-container {
+    grid-template-columns: 1fr !important;
+  }
+  body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Company Update section (blog): WHAT'S NEW scrollable card */
+.twbb-company-update-section {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.twbb-company-update-title {
+  margin-bottom: 1rem !important;
+}
+.twbb-whats-new-card {
+  border: 1px solid #444;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fafafa;
+}
+.twbb-whats-new-heading {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: #fff;
+}
+.twbb-whats-new-scroll {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 1rem 1.25rem;
+}
+.twbb-whats-new-row {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+.twbb-whats-new-datetime {
+  flex: 0 0 140px;
+  font-size: 0.9rem;
+  color: #555;
+}
+.twbb-whats-new-events {
+  flex: 1;
+}
+
+/* FAQ page: title + description left, questions right, same level (top-aligned) */
+.elementor-element-7blqyvt1 > .e-con-inner {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) !important;
+  gap: 2rem 3rem !important;
+  align-items: start !important;
+}
+.elementor-element-7blqyvt1 .elementor-element-xse7bmtm,
+.elementor-element-7blqyvt1 .elementor-element-sagcuj9u {
+  grid-column: 1 !important;
+}
+.elementor-element-7blqyvt1 .elementor-element-cwgzm7yo {
+  grid-column: 2 !important;
+  grid-row: 1 / -1 !important;
+}
+@media (max-width: 768px) {
+  .elementor-element-7blqyvt1 > .e-con-inner {
+    grid-template-columns: 1fr !important;
+  }
+  .elementor-element-7blqyvt1 .elementor-element-cwgzm7yo {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+}
+
+/* Contact Us section: "Need to have a word with us?" card full width, at least ~4x wider */
+.elementor-element-7blqyvt1 .elementor-element-wbjabwhb {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+.elementor-element-wbjabwhb .elementor-widget-container,
+.elementor-element-wbjabwhb .twbb_cta-wrapper,
+.elementor-element-wbjabwhb .twbb_cta-content-wrapper,
+.elementor-element-wbjabwhb .twbb_cta-content-inner {
+  max-width: 100% !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  min-width: min(100%, 1200px) !important; /* fallback: older browsers use line above */
+}
+.elementor-element-wbjabwhb .contact-email-template {
+  max-width: 100% !important;
+  width: 100% !important;
+  min-width: 100% !important;
+  min-width: min(100%, 1200px) !important; /* fallback: older browsers use line above */
+}
+/* Contact card image (customer support / get in touch) */
+.elementor-element-wbjabwhb .twbb_cta-image-background-wrapper {
+  min-height: 140px;
+}
+.elementor-element-wbjabwhb .twbb_cta-image-html-tag {
+  overflow: hidden !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+.elementor-element-wbjabwhb .twbb_cta-image-html-tag img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+.elementor-element-wbjabwhb .twbb_cta-image-html-tag img[src^="data:image/svg"] {
+  opacity: 0 !important;
+  min-height: 140px !important;
+}
