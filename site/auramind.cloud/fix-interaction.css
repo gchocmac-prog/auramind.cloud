@@ -557,3 +557,120 @@ body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
   opacity: 0 !important;
   min-height: 140px !important;
 }
+
+/* ========== Mobile / phone browser compatibility ========== */
+
+/* Prevent horizontal scroll and cap width on small screens */
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Touch-friendly: tap highlight and no double-zoom delay */
+a,
+button,
+.twbb-menu-toggle,
+.elementor-button,
+.twbb_cta-button,
+nav.twbb-nav-menu__container a,
+.elementor-element-e1q9sn27 a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  tap-highlight-color: rgba(0, 0, 0, 0.1);
+  touch-action: manipulation;
+}
+
+/* Minimum touch target size (WCAG ~44px) for nav and main CTAs */
+@media (max-width: 768px) {
+  nav.twbb-nav-menu__container a,
+  .twbb-item {
+    min-height: 44px !important;
+    padding: 0.5rem 0.75rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  .elementor-button,
+  .twbb_cta-button,
+  a.elementor-button,
+  a.twbb_cta-button {
+    min-height: 44px !important;
+    padding: 0.6em 1.2em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .twbb-menu-toggle {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    padding: 0.5rem !important;
+  }
+}
+
+/* Header logo: smaller on narrow screens, keep tap target */
+@media (max-width: 480px) {
+  .elementor-element-e1q9sn27 .elementor-widget-container a {
+    min-height: 48px !important;
+    background-size: contain !important;
+  }
+}
+
+/* Safe area for notched phones (iOS, etc.) */
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .elementor-element-yaekp2ga .e-con-inner {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Service cards: single column on narrow phones (avoid min-width overflow) */
+@media (max-width: 480px) {
+  .elementor-element-mpmj2ts1 > .elementor-element {
+    min-width: 0 !important;
+    flex: 1 1 100% !important;
+  }
+  .elementor-element-wmfsh7gq {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* What's New section: stack date above content on small screens */
+@media (max-width: 480px) {
+  .twbb-whats-new-row {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  .twbb-whats-new-datetime {
+    flex: 0 0 auto !important;
+  }
+}
+
+/* Tables and contact: prevent overflow on phones */
+@media (max-width: 768px) {
+  .elementor-element-wbjabwhb .contact-email-template table,
+  .contact-email-template table {
+    display: block !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Readable base font on mobile (avoid iOS auto-zoom on focus) */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    font-size: 16px !important;
+  }
+}
