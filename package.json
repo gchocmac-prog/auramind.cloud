@@ -4,11 +4,21 @@
   "description": "",
   "main": "proxy.js",
   "devDependencies": {
-    "website-scraper": "^6.0.0"
+    "browser-sync": "^3.0.4",
+    "rss-parser": "^3.13.0",
+    "website-scraper": "^6.0.0",
+    "wrangler": "^4.0.0"
   },
   "scripts": {
     "scrape": "node scrape-site.mjs",
+    "apply-customizations": "node apply-customizations.mjs",
+    "fetch-news": "node fetch-news.mjs",
+    "update-site": "npm run scrape && npm run apply-customizations",
+    "update-news": "npm run fetch-news && npm run apply-customizations",
+    "build": "npm run apply-customizations",
     "serve": "node serve.js",
+    "dev": "browser-sync start --server site/auramind.cloud --files \"site/auramind.cloud/**/*\" --port 3000 --open",
+    "deploy": "wrangler deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

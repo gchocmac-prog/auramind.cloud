@@ -33,17 +33,17 @@
       }
     },
     {
-      "label": "Start Local Server (Fast)",
+      "label": "Start Local Server (Interactive)",
       "type": "shell",
-      "command": "node",
-      "args": ["serve.js"],
+      "command": "npm",
+      "args": ["run", "dev"],
       "options": { "cwd": "${workspaceFolder}" },
       "isBackground": true,
       "problemMatcher": {
         "pattern": { "regexp": "^$" },
         "background": {
           "activeOnStart": true,
-          "beginsPattern": "Local:|Ready|Proxying|http://",
+          "beginsPattern": "Local:|Ready|Proxying|Browsersync|http://",
           "endsPattern": ".*"
         }
       },
