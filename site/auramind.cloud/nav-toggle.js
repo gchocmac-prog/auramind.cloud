@@ -7,7 +7,11 @@
   if (typeof document.addEventListener !== 'function' || typeof document.querySelectorAll !== 'function') return;
 
   function applyTitleAndFooterFix() {
-    document.title = 'Auramind AI';
+    var t = document.title || '';
+    if (t.indexOf('\uFFFD') !== -1) {
+      document.title = t.replace(/\s*[\uFFFD?]+\s*/g, ' | ').replace(/\s*\|\s*\|/g, ' | ') || 'Auramind AI';
+    }
+    if (!document.title) document.title = 'Auramind AI';
     var footer = document.querySelector('.elementor-element-6hbale5l .elementor-widget-container');
     if (footer && footer.textContent && (footer.textContent.indexOf('2025') !== -1 || footer.textContent.indexOf('\uFFFD') !== -1)) {
       footer.textContent = '\u00A9 2025 Auramind AI. All rights reserved. Leading the way in AI infrastructure management.';

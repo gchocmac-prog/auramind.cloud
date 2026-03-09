@@ -12,10 +12,11 @@
   "scripts": {
     "scrape": "node scrape-site.mjs",
     "apply-customizations": "node apply-customizations.mjs",
+    "seo": "node inject-seo.mjs",
     "fetch-news": "node fetch-news.mjs",
-    "update-site": "npm run scrape && npm run apply-customizations",
+    "update-site": "npm run scrape && npm run apply-customizations && npm run seo",
     "update-news": "npm run fetch-news && npm run apply-customizations",
-    "build": "npm run apply-customizations",
+    "build": "npm run apply-customizations && npm run seo",
     "serve": "node serve.js",
     "dev": "browser-sync start --server site/auramind.cloud --files \"site/auramind.cloud/**/*\" --port 3000 --open",
     "deploy": "wrangler deploy",

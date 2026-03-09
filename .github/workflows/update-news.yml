@@ -1,9 +1,11 @@
 name: Update Latest News (scheduled scrape)
 on:
   schedule:
-    # Run daily at 02:00 UTC
-    - cron: '0 2 * * *'
+    # Run daily at 08:00 Malaysia time (UTC+8) = 00:00 UTC
+    - cron: '0 0 * * *'
   workflow_dispatch: # Allow manual trigger
+permissions:
+  contents: write  # Required for git push (otherwise blog never updates from scheduled run)
 jobs:
   update:
     runs-on: ubuntu-latest

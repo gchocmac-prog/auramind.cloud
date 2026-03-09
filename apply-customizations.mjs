@@ -28,8 +28,17 @@ html = html.replace(
 // 3. Hero section: paragraphs (match various possible originals)
 html = html.replace(
   /<p>AuraMind AI leads the way in comprehensive AI infrastructure[^<]*<\/p>/,
-  '<p>Auramind AI provides a clear vision for businesses of all scales for their needs of smart solutions in modern days. From planning the infrastructure to deployment of AI servers, or just simply in need of consultation to better adapt in this new era, we make sure anyone could turn to us for a better future.</p>\n\t\t\t\t\t\t\t<p>Click below to discover our services.</p>'
+  '<p>Auramind AI provides a clear vision for businesses of all scales for their needs of smart solutions in modern days. From planning the infrastructure to deployment of AI servers, or just simply in need of consultation to better adapt in this new era, we make sure anyone could turn to us for a better future.</p>\n\t\t\t\t\t\t\t<p>Click below to discover our services.</p>\n\t\t\t\t\t\t\t<p>Looking to <strong>buy servers</strong>, <strong>customize servers</strong> for AI, or need a <strong>business solution for AI deployment</strong>? We offer GPU server rental, custom AI infrastructure, and full AI deployment support.</p>'
 );
+
+// 3b. SEO: keyword-rich line for search & AI (add if missing)
+const keywordLine = '<p>Looking to <strong>buy servers</strong>, <strong>customize servers</strong> for AI, or need a <strong>business solution for AI deployment</strong>? We offer GPU server rental, custom AI infrastructure, and full AI deployment support.</p>';
+if (!html.includes('business solution for AI deployment')) {
+  html = html.replace(
+    /(<p>Click below to discover our services\.<\/p>)/,
+    '$1\n\t\t\t\t\t\t\t' + keywordLine
+  );
+}
 
 // 4. Section 3 intro
 html = html.replace(

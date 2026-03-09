@@ -30,6 +30,21 @@ function getImage(item) {
   return m ? m[1] : null;
 }
 
+/** Exclude promotional / ad-like posts (deals, sponsored, sales, giveaways, etc.) */
+function isPromotional(item) {
+  const title = (item.title || '').toLowerCase();
+  const content = stripHtml(item.content || item.contentSnippet || item.summary || '').toLowerCase();
+  const text = title + ' ' + content;
+  const promoPatterns = [
+    /\bsponsored\b/, /\bpromo\b/, /\bpromotion\b/, /\bad\s*:\s*/, /\bdeal\b(?!\s*with)/,
+    /\bsale\b/, /\bbuy\s+now\b/, /\bshop\s+now\b/, /\bdiscount\b/, /\%\s*off\b/,
+    /\bgiveaway\b/, /\bcontest\b/, /\bwin\s+a\b/, /\blimited\s+time\b/, /\bpre[- ]?order\b/,
+    /\bprice\s*drop\b/, /\bflash\s*sale\b/, /\bcoupon\b/, /\baffiliate\b/,
+    /\bthis\s*post\s+is\s+sponsored\b/, /\bpaid\s+partnership\b/, /\bin\s+collaboration\s+with\b/,
+  ];
+  return promoPatterns.some((re) => re.test(text));
+}
+
 async function main() {
   const config = JSON.parse(readFileSync(join(__dirname, 'news-sources.json'), 'utf8'));
   const all = [];
@@ -38,6 +53,7 @@ async function main() {
     try {
       const feed = await parser.parseURL(feedUrl);
       (feed.items || []).slice(0, 5).forEach((item) => {
+        if (isPromotional(item)) return;
         all.push({
           title: item.title || 'Untitled',
           link: item.link || '#',

@@ -187,10 +187,27 @@ body.page-id-147 .elementor-element-huaaxvrj {
   background-color: #f5f5f5 !important;
 }
 
-/* Site-wide: geometric cube pattern background, half transparent */
+/* Page height: fit content, no huge gap above footer (override theme min-height) */
+html,
+body {
+  min-height: 0 !important;
+  height: auto !important;
+}
 body {
   position: relative;
 }
+.elementor-section.elementor-section-stretched,
+.elementor-element-7f979378 {
+  min-height: 0 !important;
+}
+main.elementor,
+.elementor > .elementor-inner,
+.elementor-161,
+.elementor-162 {
+  min-height: 0 !important;
+}
+
+/* Site-wide: geometric cube pattern background, half transparent */
 body::before {
   content: "";
   position: fixed;
@@ -370,6 +387,30 @@ body::before {
   min-height: 120px !important;
 }
 
+/* Wide range card (last, centred): same width as other service cards */
+.elementor-element-widerange-cta-wrap {
+  flex: 1 1 320px !important;
+  min-width: 280px !important;
+  max-width: 400px !important;
+  margin: 0 auto !important;
+}
+.elementor-element-widerange-cta-wrap .elementor-element-widerange-cta {
+  flex: 0 0 auto !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+.elementor-element-widerange-cta-wrap .elementor-widget-container {
+  flex: 1 1 auto !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+.elementor-element-widerange-cta-wrap .twbb_cta-wrapper {
+  max-width: 100% !important;
+  width: 100% !important;
+  border: 1px solid #2d2d2d !important;
+  border-radius: 6px !important;
+}
+
 /* FAQs page (Contact Us): hide FAQs section and welcome – show only "Need to have a word with us?" and email table */
 body.page-id-148 .elementor-element-xse7bmtm,
 body.page-id-148 .elementor-element-sagcuj9u,
@@ -386,8 +427,8 @@ body.page-id-148 .elementor-invisible {
   visibility: visible !important;
   opacity: 1 !important;
 }
-/* Contact Us (FAQs) page: hide broken footer logo image (external auramind-logo.png) */
-body.page-id-148 .elementor-element-w1qkqj8t {
+/* All pages: hide broken footer logo (external auramind-logo.png 404 on static site) */
+.elementor-element-w1qkqj8t {
   display: none !important;
 }
 
