@@ -2,6 +2,37 @@
    Fallbacks: min() has fallback; :has() has body.page-id-147 fallback for blog; mask uses -webkit- prefix.
    Desktop: key layout/hero/nav re-applied in @media (min-width: 769px) for consistency across all desktop browsers. */
 
+/* Shared green for card logos (Planning Stage + Payment Stage) so all match */
+:root {
+  --auramind-card-logo-green: #16a34a;
+}
+
+/* Return to previous page button on service sub-pages (left-aligned) */
+.auramind-return-to-services {
+  padding: 1.5rem 0 1.5rem 20px !important;
+  text-align: left !important;
+  max-width: 1200px;
+  margin: 0 auto 0 auto !important;
+  margin-bottom: 1rem !important;
+}
+
+.auramind-return-btn {
+  display: inline-block !important;
+  padding: 0.5em 1em !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: #2563eb !important;
+  text-decoration: none !important;
+  border: 1px solid #2563eb !important;
+  border-radius: 4px !important;
+  transition: background-color 0.2s, color 0.2s !important;
+}
+
+.auramind-return-btn:hover {
+  background-color: #2563eb !important;
+  color: #fff !important;
+}
+
 /* Site-wide: show content when animation JS doesn't run (e.g. Chrome/Firefox with blocked/404 scripts) */
 .elementor-invisible,
 body .elementor-element.elementor-invisible,
@@ -17,6 +48,7 @@ body .elementor-element.elementor-invisible,
   background: url(/assets/logo-header.jpg) no-repeat left center !important;
   background-size: contain !important;
 }
+
 .elementor-element-e1q9sn27 .elementor-widget-container img:not([src^="/assets/"]) {
   opacity: 0 !important;
   position: absolute !important;
@@ -25,6 +57,7 @@ body .elementor-element.elementor-invisible,
   height: auto !important;
   min-height: 60px !important;
 }
+
 .elementor-element-e1q9sn27 .elementor-widget-container img[src^="/assets/logo-header"] {
   opacity: 1 !important;
   position: relative !important;
@@ -49,6 +82,7 @@ body.page-id-146 .elementor-element-75f67604 {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
 .elementor-element-oytpz3n0 .e-con-inner,
 .elementor-element-ydahyccf .e-con-inner,
 .elementor-element-mpmj2ts1 .e-con-inner,
@@ -69,6 +103,7 @@ body.page-id-146 .elementor-element-75f67604 {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
 .elementor-element-esfbvho7 .elementor-invisible,
 .elementor-element-8l02zu5w .elementor-invisible {
   visibility: visible !important;
@@ -85,17 +120,28 @@ body.page-id-146 .elementor-element-75f67604 {
   background-color: transparent !important;
   background-image: none !important;
 }
+
 .elementor-element-esfbvho7 {
-  background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(/assets/hero-kl-towers.png) !important;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(/assets/hero-kl-towers.png) !important;
   background-color: transparent !important;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
 }
+
 .elementor-element-esfbvho7 .e-con-inner {
   position: relative !important;
   z-index: 1 !important;
   background: none !important;
+}
+
+/* Sub-service pages: grey-to-transparent gradient on the HERO BLOCK only (not the whole section).
+   The section 7f979378 wraps both hero and page body; the hero is the .twbb_full_h container. */
+body.page-id-149 .elementor-element-7f979378 .twbb_section.twbb_full_h,
+body.page-id-150 .elementor-element-7f979378 .twbb_section.twbb_full_h,
+body.page-id-151 .elementor-element-7f979378 .twbb_section.twbb_full_h {
+  background-image: linear-gradient(180deg, #e5e7eb 0%, transparent 100%) !important;
+  background-color: transparent !important;
 }
 
 /* Hero section: title and text white in all browsers (home + services) */
@@ -105,30 +151,159 @@ body.page-id-146 .elementor-element-75f67604 {
 .elementor-element-8l02zu5w .elementor-widget-container {
   color: #ffffff !important;
 }
+
 .elementor-element-esfbvho7 .elementor-widget-container a:not(.elementor-button):not(.twbb_cta-button),
 .elementor-element-8l02zu5w .elementor-widget-container a:not(.elementor-button):not(.twbb_cta-button) {
   color: #ffffff !important;
 }
 
-/* Services hero: contextual background – override theme black */
+/* Services hero: main services page = grey radial gradient; sub-service pages = no background */
 .elementor-element-8l02zu5w,
 .elementor-element-8l02zu5w::before,
 .elementor-element-8l02zu5w::after {
-  background-color: transparent !important;
+  background-color: #1a1a1a !important;
   background-image: none !important;
 }
+
 .elementor-element-8l02zu5w {
-  background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(/assets/hero-services.png) !important;
-  background-color: transparent !important;
+  background-image: radial-gradient(ellipse 100% 100% at 50% 50%,
+      #4f4f4f 0%,
+      #404040 25%,
+      #323232 50%,
+      #242424 75%,
+      #161616 100%) !important;
+  background-color: #161616 !important;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
 }
-.elementor-element-8l02zu5w .e-con-inner {
+
+/* Sub-service hero: remove black/grey background so it’s transparent */
+.elementor-element-q0cugbsk,
+.elementor-element-wvf7j5xq,
+.elementor-element-ihtx4g4l,
+.elementor-element-q0cugbsk::before,
+.elementor-element-q0cugbsk::after,
+.elementor-element-wvf7j5xq::before,
+.elementor-element-wvf7j5xq::after,
+.elementor-element-ihtx4g4l::before,
+.elementor-element-ihtx4g4l::after {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Sub-service hero: height 180vh (50% taller than previous 120vh) */
+.elementor-element-q0cugbsk,
+.elementor-element-wvf7j5xq,
+.elementor-element-ihtx4g4l {
+  min-height: 180vh !important;
+  height: 180vh !important;
+}
+
+/* Sub-service hero: force all text and buttons to black (high specificity to override theme) */
+.elementor-element-q0cugbsk .elementor-heading-title,
+.elementor-element-q0cugbsk .elementor-widget-container,
+.elementor-element-q0cugbsk .e-con-inner,
+.elementor-element-wvf7j5xq .elementor-heading-title,
+.elementor-element-wvf7j5xq .elementor-widget-container,
+.elementor-element-wvf7j5xq .e-con-inner,
+.elementor-element-ihtx4g4l .elementor-heading-title,
+.elementor-element-ihtx4g4l .elementor-widget-container,
+.elementor-element-ihtx4g4l .e-con-inner {
+  color: #000 !important;
+}
+
+.elementor-element-q0cugbsk .twbb-headline,
+.elementor-element-q0cugbsk .twbb-headline span,
+.elementor-element-q0cugbsk .twbb-headline .twbb-headline-plain-text,
+.elementor-element-q0cugbsk .twbb-headline em,
+.elementor-element-q0cugbsk h1,
+.elementor-element-wvf7j5xq .twbb-headline,
+.elementor-element-wvf7j5xq .twbb-headline span,
+.elementor-element-wvf7j5xq .twbb-headline .twbb-headline-plain-text,
+.elementor-element-wvf7j5xq .twbb-headline em,
+.elementor-element-wvf7j5xq h1,
+.elementor-element-ihtx4g4l .twbb-headline,
+.elementor-element-ihtx4g4l .twbb-headline span,
+.elementor-element-ihtx4g4l .twbb-headline .twbb-headline-plain-text,
+.elementor-element-ihtx4g4l .twbb-headline em,
+.elementor-element-ihtx4g4l h1 {
+  color: #000 !important;
+}
+
+.elementor-element-q0cugbsk .elementor-widget-container a:not(.elementor-button):not(.auramind-return-btn),
+.elementor-element-wvf7j5xq .elementor-widget-container a:not(.elementor-button):not(.auramind-return-btn),
+.elementor-element-ihtx4g4l .elementor-widget-container a:not(.elementor-button):not(.auramind-return-btn) {
+  color: #000 !important;
+}
+
+/* Sub-service hero: buttons black (text + border) */
+.elementor-element-q0cugbsk .elementor-button,
+.elementor-element-q0cugbsk .elementor-button .elementor-button-text,
+.elementor-element-wvf7j5xq .elementor-button,
+.elementor-element-wvf7j5xq .elementor-button .elementor-button-text,
+.elementor-element-ihtx4g4l .elementor-button,
+.elementor-element-ihtx4g4l .elementor-button .elementor-button-text {
+  color: #000 !important;
+  border-color: #000 !important;
+  background-color: transparent !important;
+}
+
+.elementor-element-q0cugbsk .elementor-button:hover,
+.elementor-element-q0cugbsk .elementor-button:hover .elementor-button-text,
+.elementor-element-wvf7j5xq .elementor-button:hover,
+.elementor-element-wvf7j5xq .elementor-button:hover .elementor-button-text,
+.elementor-element-ihtx4g4l .elementor-button:hover,
+.elementor-element-ihtx4g4l .elementor-button:hover .elementor-button-text {
+  color: #fff !important;
+  background-color: #000 !important;
+  border-color: #000 !important;
+}
+
+/* Sub-service pages: all text black in cards section (titles, body, icon-box) */
+.elementor-element-sulx42kb .elementor-heading-title,
+.elementor-element-sulx42kb .elementor-widget-container,
+.elementor-element-sulx42kb .elementor-icon-box-title,
+.elementor-element-sulx42kb .elementor-icon-box-description,
+.elementor-element-qciix3l3 .elementor-heading-title,
+.elementor-element-qciix3l3 .elementor-widget-container,
+.elementor-element-qciix3l3 .elementor-icon-box-title,
+.elementor-element-qciix3l3 .elementor-icon-box-description,
+.elementor-element-t46ufr6b .elementor-heading-title,
+.elementor-element-t46ufr6b .elementor-widget-container,
+.elementor-element-t46ufr6b .elementor-icon-box-title,
+.elementor-element-t46ufr6b .elementor-icon-box-description {
+  color: #000000 !important;
+}
+
+.elementor-element-sulx42kb .elementor-button,
+.elementor-element-qciix3l3 .elementor-button,
+.elementor-element-t46ufr6b .elementor-button,
+.elementor-element-sulx42kb .elementor-button .elementor-button-text,
+.elementor-element-qciix3l3 .elementor-button .elementor-button-text,
+.elementor-element-t46ufr6b .elementor-button .elementor-button-text {
+  color: #000000 !important;
+  border-color: #000000 !important;
+  background-color: transparent !important;
+}
+
+.elementor-element-sulx42kb .elementor-button:hover,
+.elementor-element-qciix3l3 .elementor-button:hover,
+.elementor-element-t46ufr6b .elementor-button:hover {
+  color: #ffffff !important;
+  background-color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+.elementor-element-8l02zu5w .e-con-inner,
+.elementor-element-q0cugbsk .e-con-inner,
+.elementor-element-wvf7j5xq .e-con-inner,
+.elementor-element-ihtx4g4l .e-con-inner {
   position: relative !important;
   z-index: 1 !important;
   background: none !important;
 }
+
 /* Services page: section/column containing hero so black doesn’t show */
 body.page-id-145 .elementor-element-7f979378,
 body.page-id-145 .elementor-element-7f979378 .elementor-column,
@@ -137,25 +312,651 @@ body.page-id-145 .elementor-element-7f979378 .elementor-widget-wrap {
   background-image: none !important;
 }
 
+/* Sub-service hero: content in the middle, all centre-aligned */
+.elementor-element-q0cugbsk .e-con-inner,
+.elementor-element-wvf7j5xq .e-con-inner,
+.elementor-element-ihtx4g4l .e-con-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.elementor-element-q0cugbsk .e-con-inner .elementor-widget-container,
+.elementor-element-q0cugbsk .e-con-inner .twbb-headline,
+.elementor-element-q0cugbsk .e-con-inner h1,
+.elementor-element-wvf7j5xq .e-con-inner .elementor-widget-container,
+.elementor-element-wvf7j5xq .e-con-inner .twbb-headline,
+.elementor-element-wvf7j5xq .e-con-inner h1,
+.elementor-element-ihtx4g4l .e-con-inner .elementor-widget-container,
+.elementor-element-ihtx4g4l .e-con-inner .twbb-headline,
+.elementor-element-ihtx4g4l .e-con-inner h1 {
+  text-align: center !important;
+}
+
+.elementor-element-q0cugbsk .e-con-inner .elementor-button-wrapper,
+.elementor-element-wvf7j5xq .e-con-inner .elementor-button-wrapper,
+.elementor-element-ihtx4g4l .e-con-inner .elementor-button-wrapper {
+  justify-content: center !important;
+}
+
+.elementor-element-q0cugbsk .e-con-inner .elementor-element.elementor-widget-button,
+.elementor-element-wvf7j5xq .e-con-inner .elementor-element.elementor-widget-button,
+.elementor-element-ihtx4g4l .e-con-inner .elementor-element.elementor-widget-button {
+  align-self: center !important;
+}
+
+/* Sub-service pages: cards section width, alignment, responsive (same design on AI Infrastructure Management, AI Operation and Maintenance, AI Server Rentals) */
+.elementor-element-sulx42kb,
+.elementor-element-qciix3l3,
+.elementor-element-t46ufr6b {
+  width: 100% !important;
+  max-width: min(1280px, 100%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(1rem, 4vw, 2.5rem) !important;
+  padding-right: clamp(1rem, 4vw, 2.5rem) !important;
+  box-sizing: border-box !important;
+}
+
+/* Sub-service pages: section width and height (alignment/width from ai-infrastructure-management applied to all) */
+body.page-id-149 .elementor-element-sulx42kb,
+body.page-id-150 .elementor-element-sulx42kb,
+body.page-id-151 .elementor-element-sulx42kb {
+  width: 100% !important;
+  max-width: min(1664px, 100%) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  height: auto !important;
+}
+
+.auramind-benefits-card-section,
+.auramind-card-section {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-bottom: 2rem !important;
+}
+
+/* "WHERE DO I PUT MY SERVERS?!" section: single card, no right slot, centred in section.
+   flex: 0 0 auto keeps position fixed on resize; only width (50%) changes so card scales, doesn't shift. */
+.auramind-benefits-card-section {
+  flex: 0 0 auto !important;
+  align-self: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 50% !important;
+  max-width: 50% !important;
+}
+
+/* AI Operation page: make benefits card 20% wider (50% -> 60%) */
+body.page-id-151 .auramind-benefits-card-section {
+  width: 50.4% !important;
+  max-width: 50.4% !important;
+}
+
+/* AI Operation page: remove the Planning Stage row (keep Payment Stage row) */
+body.page-id-151 .elementor-element-sulx42kb .e-con-inner > .auramind-planning-row:not(.auramind-payment-stage-row) {
+  display: none !important;
+}
+
+/* AI Operation hero: make content block 20% narrower */
+body.page-id-151 .elementor-element-q0cugbsk .e-con-inner > .elementor-element-x1nqyg68,
+body.page-id-151 .elementor-element-q0cugbsk .e-con-inner > .elementor-element-4qzwddcm {
+  width: 80% !important;
+  max-width: 80% !important;
+}
+
+.auramind-benefits-card-section .elementor-element {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.auramind-benefits-card-section .elementor-widget-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.auramind-benefits-card-section .elementor-heading-title,
+.auramind-benefits-card-section .elementor-widget-container,
+.auramind-card-section .elementor-heading-title,
+.auramind-card-section .elementor-widget-container {
+  color: #000 !important;
+}
+
+/* Benefits card: centre-aligned; font sizes 2 units smaller */
+.auramind-benefits-card-section .elementor-heading-title,
+.auramind-benefits-card-section .elementor-widget-container {
+  text-align: center !important;
+}
+
+.auramind-benefits-card-section .elementor-heading-title {
+  font-size: 1.95rem !important;
+}
+
+.auramind-benefits-card-section .elementor-widget-container {
+  font-size: 1.125rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Planning Stage & Payment Stage: font sizes 2 units larger */
+.auramind-card-section .elementor-heading-title,
+.auramind-card-section .elementor-widget-container {
+  text-align: center !important;
+}
+
+.auramind-card-section .elementor-heading-title {
+  font-size: 1.95rem !important;
+}
+
+.auramind-card-section .elementor-widget-container {
+  font-size: 1.125rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Payment Stage card: same size and position as Planning Stage (38% width, left-aligned) */
+.auramind-payment-process-card .elementor-heading-title,
+.auramind-payment-process-card .elementor-widget-container {
+  text-align: center !important;
+}
+
+.auramind-payment-process-card .elementor-heading-title {
+  font-size: 1.75rem !important;
+}
+
+.auramind-payment-process-card h3.elementor-heading-title {
+  font-size: 1.35rem !important;
+}
+
+.auramind-payment-process-card .elementor-widget-container {
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Payment Process: full-width card, single slot centred in section; moved up 5% of viewport */
+.auramind-payment-process-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 100% !important;
+  margin-top: -5vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 5vw, 3rem) !important;
+  box-sizing: border-box !important;
+  margin-bottom: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.auramind-payment-process-card .elementor-element {
+  width: 100% !important;
+  max-width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.auramind-payment-process-card .elementor-widget-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.auramind-payment-process-card .elementor-heading-title,
+.auramind-payment-process-card .elementor-widget-container {
+  color: #000 !important;
+}
+
+/* Payment Process: 4-step flow with logo on top, bold title, centered body, arrows */
+.auramind-payment-process-steps {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  gap: 0.75rem 0.25rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-top: 1rem !important;
+  box-sizing: border-box !important;
+}
+
+.auramind-payment-step {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  flex: 1 1 0 !important;
+  min-width: 220px !important;
+  max-width: none !important;
+  min-height: 220px !important;
+  box-sizing: border-box !important;
+  border: 2px solid #374151 !important;
+  border-radius: 8px !important;
+  padding: 1rem !important;
+}
+
+.auramind-payment-step-icon {
+  width: 48px !important;
+  height: 48px !important;
+  margin-bottom: 0.5rem !important;
+  color: #374151 !important;
+  flex-shrink: 0 !important;
+}
+
+.auramind-payment-step-icon svg {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+
+.auramind-payment-step-title {
+  display: block !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: #000 !important;
+  margin-bottom: 0.35rem !important;
+}
+
+.auramind-payment-step-body {
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  color: #000 !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+.auramind-payment-step-arrow {
+  font-size: 1.25rem !important;
+  color: #6b7280 !important;
+  flex-shrink: 0 !important;
+  align-self: flex-start !important;
+  padding: 1.25rem 0.25rem 0 !important;
+}
+
+@media (max-width: 768px) {
+  .auramind-payment-process-steps {
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .auramind-payment-step {
+    max-width: 100% !important;
+  }
+  .auramind-payment-step-arrow {
+    transform: rotate(90deg) !important;
+    padding: 0.25rem 0 !important;
+  }
+}
+
+.elementor-element-sulx42kb .e-con-inner,
+.elementor-element-qciix3l3 .e-con-inner,
+.elementor-element-t46ufr6b .e-con-inner {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Sub-service pages: inner section layout (single-column, centred, 957px content width). Same alignment/section width on all sub-service pages. */
+body.page-id-149 .elementor-element-sulx42kb .e-con-inner,
+body.page-id-150 .elementor-element-sulx42kb .e-con-inner,
+body.page-id-151 .elementor-element-sulx42kb .e-con-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 957px !important;
+  max-width: 100% !important;
+  justify-content: flex-start !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Container (sulx42kb) rounded corners to match inner; clip so card borders stay inside section */
+body.page-id-149 .elementor-element-sulx42kb.twbb_section.e-con-boxed,
+body.page-id-150 .elementor-element-sulx42kb.twbb_section.e-con-boxed,
+body.page-id-151 .elementor-element-sulx42kb.twbb_section.e-con-boxed {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+/* Rows: same width as container (all sub-service pages). */
+body.page-id-149 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row,
+body.page-id-150 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row,
+body.page-id-151 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row {
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  align-self: stretch !important;
+}
+
+/* Payment Stage row: centred, 878px width (all sub-service pages). */
+body.page-id-149 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row.auramind-payment-stage-row,
+body.page-id-150 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row.auramind-payment-stage-row,
+body.page-id-151 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row.auramind-payment-stage-row {
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Planning Stage row: Planning card left, Better + Scalable stacked right (height of one card) */
+.auramind-planning-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  gap: clamp(1.5rem, 4vw, 2.5rem) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-bottom: 2rem !important;
+  box-sizing: border-box !important;
+}
+
+/* Planning Stage section (no border); same width as Payment Stage row below. min-height so row can grow and never overflows. */
+.auramind-planning-row:not(.auramind-payment-stage-row) {
+  flex: 0 0 auto !important;
+  min-width: 100% !important;
+  width: 878px !important;
+  max-width: 100% !important;
+  align-self: stretch !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: clamp(1.25rem, 3vw, 1.75rem) !important;
+  box-sizing: border-box !important;
+  min-height: 350px !important;
+  height: auto !important;
+}
+
+/* Payment Stage row: same width, minimal gap so left block sits right next to the two cards; padding 28px; centered on page. */
+.auramind-planning-row.auramind-payment-stage-row {
+  flex: 0 0 auto !important;
+  min-width: 0 !important;
+  width: 878px !important;
+  max-width: 100% !important;
+  align-self: stretch !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  gap: clamp(1.5rem, 4vw, 2.5rem) !important;
+  padding: clamp(1.25rem, 3vw, 1.75rem) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+
+/* Payment Stage right slot: same width as Planning Stage right (60%) so section has same margins.
+   Layout props duplicated here for specificity; min-height moved to shared rule above. */
+.auramind-payment-stage-row .auramind-payment-stage-right {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  flex: 0 0 60% !important;
+  min-width: 0 !important;
+  gap: clamp(1rem, 2vw, 1.5rem) !important;
+  justify-content: stretch !important;
+}
+
+/* Left card: fixed 38% in both sections so right slot (and cards) are same width in Planning and Payment Stage */
+.auramind-planning-card-left {
+  flex: 0 0 38% !important;
+  min-width: 0 !important;
+  text-align: left !important;
+  margin-bottom: 0 !important;
+}
+
+.auramind-planning-card-left .elementor-heading-title,
+.auramind-planning-card-left .elementor-widget-container {
+  text-align: left !important;
+}
+
+/* Payment Stage left: shrink to content so cards sit right next to it (no big gap) */
+.auramind-payment-stage-row .auramind-planning-card-left {
+  flex: 0 0 38% !important;
+  width: auto !important;
+  max-width: 38% !important;
+}
+
+/* Payment Stage left card: fixed width for heading and text (browser preview) */
+.auramind-payment-stage-row .auramind-planning-card-left .elementor-widget-container,
+.auramind-payment-stage-row .auramind-planning-card-left h2.elementor-heading-title {
+  width: 312px !important;
+  max-width: 100% !important;
+}
+
+/* Icon-box "Scalable Solutions" (kkdhwecu) in Planning/Payment right slot: fixed width (browser preview) */
+.elementor-element-kkdhwecu {
+  width: 237px !important;
+  max-width: 100% !important;
+}
+
+.auramind-card-spacer {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+/* Right slot: fixed 60% in both sections so card widths match exactly.
+   min-height ensures both Planning and Payment Stage rows have same visual height. */
+.elementor-element-43ggwszp.auramind-two-cards-stack,
+.auramind-payment-stage-row .auramind-payment-stage-right.auramind-two-cards-stack {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  flex: 0 0 60% !important;
+  min-width: 0 !important;
+  gap: clamp(1rem, 2vw, 1.5rem) !important;
+  justify-content: stretch !important;
+  min-height: 240px !important;
+}
+
+/* Payment Stage right slot: width cap for interactive resize; gap 5% of container between cards */
+.auramind-payment-stage-row .auramind-payment-stage-right {
+  flex: 0 0 60% !important;
+  max-width: none !important;
+  gap: clamp(1rem, 2vw, 1.5rem) !important;
+}
+
+.auramind-payment-stage-row .auramind-payment-stage-right.auramind-two-cards-stack {
+  max-width: none !important;
+  gap: clamp(1rem, 2vw, 1.5rem) !important;
+}
+
+/* Each card in right slot: equal width (50%) in both Planning and Payment Stage sections; contain border inside card */
+.elementor-element-43ggwszp.auramind-two-cards-stack>.elementor-widget-icon-box,
+.elementor-element-43ggwszp.auramind-two-cards-stack>.elementor-element,
+.auramind-payment-stage-row .auramind-payment-stage-right>.elementor-widget-icon-box,
+.auramind-payment-stage-row .auramind-payment-stage-right>.elementor-element {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  max-width: 50% !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 6px !important;
+  padding: 1rem !important;
+  box-sizing: border-box !important;
+  overflow: visible !important;
+}
+
+.elementor-element-43ggwszp.auramind-two-cards-stack .elementor-icon-box-description {
+  font-size: 0.875rem !important;
+  line-height: 1.45 !important;
+}
+
+.elementor-element-43ggwszp.auramind-two-cards-stack .elementor-icon-box-title {
+  font-size: 1.05rem !important;
+}
+
+/* Payment Stage cards: logos in the middle of the card; slightly bigger; force SVG to show */
+.auramind-payment-stage-row .auramind-payment-stage-right>.elementor-widget-icon-box .elementor-icon-box-wrapper {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.auramind-payment-stage-row .auramind-payment-stage-right>.elementor-widget-icon-box .elementor-icon-box-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+.auramind-payment-stage-row .auramind-payment-stage-right .elementor-icon-box-icon {
+  width: 56px !important;
+  height: 56px !important;
+  font-size: 56px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.auramind-payment-stage-row .auramind-payment-stage-right .elementor-icon-box-icon .elementor-icon::before {
+  content: none !important;
+}
+.auramind-payment-stage-row .auramind-payment-stage-right .elementor-icon-box-icon .elementor-icon,
+.auramind-payment-stage-row .auramind-payment-stage-right .elementor-icon-box-icon svg {
+  width: 56px !important;
+  height: 56px !important;
+}
+.auramind-payment-stage-row .auramind-payment-stage-right .elementor-icon-box-icon .elementor-icon svg,
+.auramind-payment-stage-row .auramind-payment-stage-right .elementor-icon-box-icon svg {
+  fill: var(--auramind-card-logo-green) !important;
+  color: var(--auramind-card-logo-green) !important;
+}
+
+/* Flexibility card: use asset image, green matched to other logos */
+.auramind-payment-stage-row .auramind-payment-stage-right .auramind-flexibility-logo {
+  background: none !important;
+}
+.auramind-payment-stage-row .auramind-payment-stage-right .auramind-flexibility-logo .auramind-flexibility-logo-img {
+  width: 56px !important;
+  height: 56px !important;
+  object-fit: contain !important;
+  display: block !important;
+  /* Shift green in PNG to match --auramind-card-logo-green (#16a34a) */
+  filter: hue-rotate(-6deg) saturate(1.08) brightness(1.02) !important;
+}
+.auramind-payment-stage-row .auramind-payment-stage-right .auramind-flexibility-logo .elementor-icon,
+.auramind-payment-stage-row .auramind-payment-stage-right .auramind-flexibility-logo .auramind-logo-dollar-circle {
+  background: transparent !important;
+}
+
+@media (max-width: 768px) {
+
+  /* Both Planning and Payment Stage rows: same column stack so they act the same at all viewport sizes */
+  .auramind-planning-row {
+    flex-direction: column !important;
+  }
+
+  .auramind-planning-row.auramind-payment-stage-row {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .auramind-planning-card-left {
+    flex: 1 1 100% !important;
+    text-align: center !important;
+  }
+
+  .auramind-planning-card-left .elementor-heading-title,
+  .auramind-planning-card-left .elementor-widget-container {
+    text-align: center !important;
+  }
+
+  .elementor-element-43ggwszp.auramind-two-cards-stack,
+  .auramind-payment-stage-row .auramind-payment-stage-right.auramind-two-cards-stack {
+    flex: 1 1 100% !important;
+    flex-direction: column !important;
+  }
+
+  .elementor-element-43ggwszp.auramind-two-cards-stack>.elementor-widget-icon-box,
+  .elementor-element-43ggwszp.auramind-two-cards-stack>.elementor-element {
+    max-width: 100% !important;
+  }
+
+  /* Both right slots: allow empty area to collapse when stacked so section heights match */
+  .elementor-element-43ggwszp.auramind-two-cards-stack,
+  .auramind-payment-stage-row .auramind-payment-stage-right {
+    min-height: 0 !important;
+  }
+}
+
+/* Card row: flex wrap, responsive to viewport size */
+.elementor-element-43ggwszp,
+.elementor-element-sz4zos9a,
+.elementor-element-dfae7nfl {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: clamp(1.25rem, 3vw, 2rem) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  justify-content: center !important;
+}
+
+.elementor-element-43ggwszp>.elementor-widget-icon-box,
+.elementor-element-sz4zos9a>.elementor-widget-icon-box,
+.elementor-element-dfae7nfl>.elementor-widget-icon-box,
+.elementor-element-43ggwszp>.elementor-element,
+.elementor-element-sz4zos9a>.elementor-element,
+.elementor-element-dfae7nfl>.elementor-element {
+  flex: 1 1 min(300px, 100%) !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+
+  .elementor-element-43ggwszp,
+  .elementor-element-sz4zos9a,
+  .elementor-element-dfae7nfl {
+    flex-direction: column !important;
+  }
+
+  .elementor-element-43ggwszp>.elementor-widget-icon-box,
+  .elementor-element-sz4zos9a>.elementor-widget-icon-box,
+  .elementor-element-dfae7nfl>.elementor-widget-icon-box,
+  .elementor-element-43ggwszp>.elementor-element,
+  .elementor-element-sz4zos9a>.elementor-element,
+  .elementor-element-dfae7nfl>.elementor-element {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+  }
+}
+
 /* ========== Desktop consistency (all desktop browsers: Chrome, Firefox, Safari, Edge) ========== */
 @media (min-width: 769px) {
+
   /* Hero backgrounds: same on every desktop browser */
   .elementor-element-esfbvho7 {
-    background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(/assets/hero-kl-towers.png) !important;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url(/assets/hero-kl-towers.png) !important;
     -webkit-background-size: cover !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-color: transparent !important;
   }
+
   .elementor-element-8l02zu5w {
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(/assets/hero-services.png) !important;
+    background-image: radial-gradient(ellipse 100% 100% at 50% 50%,
+        #4f4f4f 0%,
+        #404040 25%,
+        #323232 50%,
+        #242424 75%,
+        #161616 100%) !important;
     -webkit-background-size: cover !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-color: transparent !important;
+    background-color: #161616 !important;
   }
+
+  .elementor-element-q0cugbsk,
+  .elementor-element-wvf7j5xq,
+  .elementor-element-ihtx4g4l {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
   /* Header + nav: horizontal layout, no hamburger */
   .elementor-element-yaekp2ga .e-con-inner {
     display: flex !important;
@@ -163,18 +964,22 @@ body.page-id-145 .elementor-element-7f979378 .elementor-widget-wrap {
     align-items: center !important;
     justify-content: space-between !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--main {
     display: flex !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--main .twbb-nav-menu {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
   }
+
   .elementor-element-0n17tim7 .twbb-menu-toggle {
     display: none !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--dropdown {
     display: none !important;
   }
@@ -193,15 +998,18 @@ body {
   min-height: 0 !important;
   height: auto !important;
 }
+
 body {
   position: relative;
 }
+
 .elementor-section.elementor-section-stretched,
 .elementor-element-7f979378 {
   min-height: 0 !important;
 }
+
 main.elementor,
-.elementor > .elementor-inner,
+.elementor>.elementor-inner,
 .elementor-161,
 .elementor-162 {
   min-height: 0 !important;
@@ -239,6 +1047,7 @@ body::before {
   flex-direction: column !important;
   justify-content: center !important;
 }
+
 .elementor-posts-container .elementor-post,
 .elementor-posts-container .twbb-news-card {
   display: flex !important;
@@ -246,6 +1055,7 @@ body::before {
   justify-content: center !important;
   text-align: left !important;
 }
+
 .elementor-posts-container .elementor-post .elementor-post__content,
 .elementor-posts-container .elementor-post .elementor-post__title,
 .elementor-posts-container .twbb-news-card .elementor-post__title,
@@ -253,6 +1063,7 @@ body::before {
 .elementor-posts-container .twbb-news-card .twbb-news-tags {
   text-align: left !important;
 }
+
 .twbb-whats-new-card,
 .twbb-whats-new-heading,
 .twbb-whats-new-scroll,
@@ -260,6 +1071,7 @@ body::before {
 .twbb-whats-new-events {
   text-align: left !important;
 }
+
 .twbb-whats-new-card {
   display: flex !important;
   flex-direction: column !important;
@@ -273,16 +1085,19 @@ body::before {
   gap: 1.5rem !important;
   width: 100% !important;
 }
-.elementor-element-wmfsh7gq > .elementor-element {
+
+.elementor-element-wmfsh7gq>.elementor-element {
   min-width: 0 !important;
   width: 100% !important;
   max-width: none !important;
 }
+
 /* Ensure all 4 cards are visible (new cards may lack data-id so animation never runs) */
 .elementor-element-wmfsh7gq .elementor-invisible {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
 @media (max-width: 768px) {
   .elementor-element-wmfsh7gq {
     grid-template-columns: 1fr !important;
@@ -290,12 +1105,13 @@ body::before {
 }
 
 /* Discover the Benefits cards: same format for every card */
-.elementor-element-wmfsh7gq .elementor-element > .elementor-widget-container {
+.elementor-element-wmfsh7gq .elementor-element>.elementor-widget-container {
   display: flex !important;
   flex: 1 !important;
   width: 100% !important;
   min-width: 0 !important;
 }
+
 .elementor-element-wmfsh7gq .twbb_cta-wrapper {
   display: flex !important;
   flex-direction: column !important;
@@ -305,6 +1121,7 @@ body::before {
   border: 1px solid #3d3d3d !important;
   border-radius: 6px !important;
 }
+
 .elementor-element-wmfsh7gq .twbb_cta-content-wrapper {
   display: flex !important;
   flex-direction: column !important;
@@ -312,9 +1129,11 @@ body::before {
   min-height: 0 !important;
   padding-top: 1rem !important;
 }
+
 .elementor-element-wmfsh7gq .twbb_cta-button-wrapper {
   margin-top: auto !important;
 }
+
 /* Same title size and line clamp (-webkit for Safari/Chrome, overflow fallback for others) */
 .elementor-element-wmfsh7gq .twbb_cta-title {
   font-size: 1.15rem !important;
@@ -325,6 +1144,7 @@ body::before {
   -webkit-box-orient: vertical !important;
   overflow: hidden !important;
 }
+
 /* Same description font size and area so button aligns */
 .elementor-element-wmfsh7gq .twbb_cta-description {
   font-size: 0.9375rem !important;
@@ -333,10 +1153,12 @@ body::before {
   min-height: 3.5em !important;
   margin-bottom: 1rem !important;
 }
+
 .elementor-element-wmfsh7gq .twbb_cta-description em {
   font-size: inherit !important;
 }
-/* Same button style for all four cards */
+
+/* Same button style for all service cards: blue Learn More */
 .elementor-element-wmfsh7gq .twbb_cta-button,
 .elementor-element-wmfsh7gq a.twbb_cta-button.elementor-button {
   display: inline-block !important;
@@ -344,19 +1166,36 @@ body::before {
   font-size: 0.95rem !important;
   font-weight: 600 !important;
   text-align: center !important;
-  border: 2px solid rgba(255, 255, 255, 0.6) !important;
-  background-color: transparent !important;
+  border: 2px solid #2563eb !important;
+  background-color: #2563eb !important;
   color: #fff !important;
   border-radius: 4px !important;
   text-decoration: none !important;
   transition: background-color 0.2s, border-color 0.2s !important;
 }
+
 .elementor-element-wmfsh7gq .twbb_cta-button:hover,
 .elementor-element-wmfsh7gq a.twbb_cta-button.elementor-button:hover {
-  background-color: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(255, 255, 255, 0.8) !important;
+  background-color: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
   color: #fff !important;
 }
+
+/* Coming soon buttons: light grey, not a link */
+.elementor-element-wmfsh7gq .twbb_cta-button--coming-soon {
+  background-color: #b0b0b0 !important;
+  border-color: #9e9e9e !important;
+  color: #fff !important;
+  cursor: default !important;
+  pointer-events: none !important;
+}
+
+.elementor-element-wmfsh7gq .twbb_cta-button--coming-soon:hover {
+  background-color: #b0b0b0 !important;
+  border-color: #9e9e9e !important;
+  color: #fff !important;
+}
+
 /* Fixed image height so card titles align evenly across the 2x2 grid */
 .elementor-element-wmfsh7gq .twbb_cta-image-background-wrapper {
   height: 200px !important;
@@ -364,6 +1203,7 @@ body::before {
   max-height: 200px !important;
   flex-shrink: 0 !important;
 }
+
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag {
   overflow: hidden !important;
   background: rgba(0, 0, 0, 0.3) !important;
@@ -371,6 +1211,7 @@ body::before {
   min-height: 200px !important;
   max-height: 200px !important;
 }
+
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag img {
   width: 100% !important;
   height: 100% !important;
@@ -379,31 +1220,46 @@ body::before {
   display: block !important;
   vertical-align: middle !important;
 }
+
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag img.lazy:not([src*="uploads"]):not([src^="/assets"]) {
   opacity: 0 !important;
 }
+
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag img[src^="data:image/svg"] {
   opacity: 0 !important;
   min-height: 120px !important;
 }
 
-/* Wide range card (last, centred): same width as other service cards */
+/* Wide range card (last, centred): 30% wider than other service cards */
 .elementor-element-widerange-cta-wrap {
-  flex: 1 1 320px !important;
-  min-width: 280px !important;
-  max-width: 400px !important;
+  flex: 1 1 416px !important;
+  min-width: 364px !important;
+  max-width: 520px !important;
   margin: 0 auto !important;
 }
+
+/* Services grid: keep wide-range card aligned as a normal grid item */
+.elementor-element-wmfsh7gq .elementor-element-widerange-cta-wrap {
+  grid-column: auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  justify-content: stretch !important;
+}
+
 .elementor-element-widerange-cta-wrap .elementor-element-widerange-cta {
   flex: 0 0 auto !important;
   max-width: 100% !important;
   width: 100% !important;
 }
+
 .elementor-element-widerange-cta-wrap .elementor-widget-container {
   flex: 1 1 auto !important;
   max-width: 100% !important;
   width: 100% !important;
 }
+
 .elementor-element-widerange-cta-wrap .twbb_cta-wrapper {
   max-width: 100% !important;
   width: 100% !important;
@@ -417,16 +1273,19 @@ body.page-id-148 .elementor-element-sagcuj9u,
 body.page-id-148 .elementor-element-cwgzm7yo {
   display: none !important;
 }
+
 /* FAQs page: show main content (CTA block) without JS – override lazy animation so page is not blank */
 body.page-id-148 .elementor-element-wbjabwhb,
 body.page-id-148 .elementor-element-7blqyvt1 {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
 body.page-id-148 .elementor-invisible {
   visibility: visible !important;
   opacity: 1 !important;
 }
+
 /* All pages: hide broken footer logo (external auramind-logo.png 404 on static site) */
 .elementor-element-w1qkqj8t {
   display: none !important;
@@ -462,32 +1321,44 @@ nav.twbb-nav-menu__container a,
 }
 
 /* ========== Header & nav: desktop vs mobile ========== */
-/* Header row: logo left, nav + Get Started right, same horizontal line (all pages) */
+/* Header row: logo and nav in the middle, all centre aligned */
 .elementor-element-yaekp2ga .e-con-inner {
   display: flex !important;
   flex-wrap: wrap !important;
   align-items: center !important;
-  justify-content: space-between !important;
+  justify-content: center !important;
   width: 100% !important;
-  gap: 1rem !important;
+  gap: 1.5rem !important;
 }
+
 .elementor-element-yaekp2ga .elementor-element-e1q9sn27 {
   flex: 0 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
+
+.elementor-element-yaekp2ga .elementor-element-e1q9sn27 .elementor-widget-container {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
 .elementor-element-yaekp2ga .elementor-element-0n17tim7 {
-  flex: 1 1 auto !important;
+  flex: 0 0 auto !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-end !important;
+  justify-content: center !important;
   min-width: 0 !important;
 }
-.elementor-element-yaekp2ga .elementor-element-0n17tim7 > .elementor-widget-container {
+
+.elementor-element-yaekp2ga .elementor-element-0n17tim7>.elementor-widget-container {
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-end !important;
+  justify-content: center !important;
   flex-wrap: wrap !important;
   gap: 0.5rem !important;
-  width: 100% !important;
+  width: auto !important;
 }
 
 /* Desktop: horizontal nav, no hamburger, no dropdown */
@@ -495,22 +1366,27 @@ nav.twbb-nav-menu__container a,
   .elementor-element-0n17tim7 .twbb-nav-menu--main {
     display: flex !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--main .twbb-nav-menu {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
+    justify-content: center !important;
     gap: 0.25rem !important;
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--main .twbb-nav-menu li {
     display: inline-block !important;
   }
+
   .elementor-element-0n17tim7 .twbb-menu-toggle {
     display: none !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--dropdown {
     display: none !important;
   }
@@ -526,12 +1402,14 @@ nav.twbb-nav-menu__container a,
   .elementor-element-0n17tim7 .twbb-nav-menu--main {
     display: none !important;
   }
+
   .elementor-element-0n17tim7 .twbb-menu-toggle {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
     cursor: pointer !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--dropdown {
     display: none !important;
     position: absolute !important;
@@ -539,29 +1417,34 @@ nav.twbb-nav-menu__container a,
     left: 0 !important;
     right: 0 !important;
     background: #fff !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
     z-index: 1000 !important;
     max-height: 70vh !important;
     overflow-y: auto !important;
   }
+
   .elementor-element-0n17tim7.twbb-nav-menu--toggle-active .twbb-nav-menu--dropdown {
     display: block !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--dropdown .twbb-nav-menu {
     flex-direction: column !important;
     padding: 0.5rem !important;
     list-style: none !important;
     margin: 0 !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--dropdown .twbb-nav-menu li {
     display: block !important;
     border-bottom: 1px solid #eee !important;
   }
+
   .elementor-element-0n17tim7 .twbb-nav-menu--dropdown .twbb-nav-menu a {
     display: block !important;
     padding: 0.75rem 1rem !important;
   }
-  .elementor-element-0n17tim7 > .elementor-widget-container {
+
+  .elementor-element-0n17tim7>.elementor-widget-container {
     position: relative !important;
   }
 }
@@ -571,6 +1454,7 @@ nav.twbb-nav-menu__container a,
 .elementor-element-e1q9sn27 .elementor-widget-container a {
   background-color: transparent !important;
 }
+
 /* Blend logo so white areas show header colour instead of a white box */
 .elementor-element-e1q9sn27 .elementor-widget-container a {
   mix-blend-mode: darken !important;
@@ -587,9 +1471,11 @@ nav.twbb-nav-menu__container a,
 .elementor-toggle .elementor-tab-content {
   display: none !important;
 }
-.elementor-toggle .elementor-tab-title.elementor-active + .elementor-tab-content {
+
+.elementor-toggle .elementor-tab-title.elementor-active+.elementor-tab-content {
   display: block !important;
 }
+
 .elementor-toggle .elementor-tab-title {
   cursor: pointer !important;
   pointer-events: auto !important;
@@ -617,6 +1503,7 @@ nav.twbb-nav-menu__container a,
   align-items: center !important;
   text-align: center !important;
 }
+
 .elementor-element-oytpz3n0 .elementor-element-661pu6al {
   display: flex !important;
   flex-direction: column !important;
@@ -624,9 +1511,11 @@ nav.twbb-nav-menu__container a,
   text-align: center !important;
   width: 100% !important;
 }
+
 .elementor-element-oytpz3n0 .elementor-widget-container {
   text-align: center !important;
 }
+
 .elementor-element-oytpz3n0 .elementor-element-zztmxeuu {
   display: flex !important;
   flex-direction: row !important;
@@ -635,16 +1524,19 @@ nav.twbb-nav-menu__container a,
   gap: 2rem !important;
   width: 100% !important;
 }
-.elementor-element-oytpz3n0 .elementor-element-zztmxeuu > .elementor-element {
+
+.elementor-element-oytpz3n0 .elementor-element-zztmxeuu>.elementor-element {
   flex: 1 1 200px !important;
   min-width: 200px;
   max-width: 50%;
 }
+
 @media (max-width: 600px) {
   .elementor-element-oytpz3n0 .elementor-element-zztmxeuu {
     flex-wrap: wrap !important;
   }
-  .elementor-element-oytpz3n0 .elementor-element-zztmxeuu > .elementor-element {
+
+  .elementor-element-oytpz3n0 .elementor-element-zztmxeuu>.elementor-element {
     max-width: 100% !important;
   }
 }
@@ -656,6 +1548,7 @@ nav.twbb-nav-menu__container a,
   align-items: center !important;
   text-align: center !important;
 }
+
 .elementor-element-ydahyccf .elementor-element-dy7d6jsp {
   display: flex !important;
   flex-direction: column !important;
@@ -663,10 +1556,12 @@ nav.twbb-nav-menu__container a,
   text-align: center !important;
   width: 100% !important;
 }
+
 .elementor-element-ydahyccf .elementor-element-dy7d6jsp .elementor-heading-title,
 .elementor-element-ydahyccf .elementor-element-dy7d6jsp .elementor-widget-container {
   text-align: center !important;
 }
+
 .elementor-element-ydahyccf .elementor-element-mpmj2ts1 {
   width: 100% !important;
 }
@@ -686,12 +1581,14 @@ nav.twbb-nav-menu__container a,
   line-height: 1.35 !important;
   font-weight: 700 !important;
 }
+
 .elementor-element-mpmj2ts1 .twbb_cta-content-wrapper,
 .elementor-element-mpmj2ts1 .twbb_cta-content-inner,
 .elementor-element-wmfsh7gq .twbb_cta-content-wrapper,
 .elementor-element-wmfsh7gq .twbb_cta-content-inner {
   text-align: left !important;
 }
+
 .elementor-element-mpmj2ts1 .twbb_cta-title,
 .elementor-element-wmfsh7gq .twbb_cta-title {
   font-size: 1.15rem !important;
@@ -699,20 +1596,24 @@ nav.twbb-nav-menu__container a,
   margin: 0 0 0.75rem 0 !important;
   text-align: left !important;
 }
+
 .elementor-element-mpmj2ts1 .twbb_cta-description,
 .elementor-element-wmfsh7gq .twbb_cta-description {
   font-size: 0.9375rem !important;
   line-height: 1.5 !important;
   text-align: left !important;
 }
+
 .elementor-element-mpmj2ts1 .twbb_cta-description em,
 .elementor-element-wmfsh7gq .twbb_cta-description em {
   font-size: inherit !important;
 }
+
 .elementor-element-mpmj2ts1 .twbb_cta-button-wrapper,
 .elementor-element-wmfsh7gq .twbb_cta-button-wrapper {
   text-align: left !important;
 }
+
 .elementor-element-mpmj2ts1 .twbb_cta-button,
 .elementor-element-mpmj2ts1 a.twbb_cta-button.elementor-button,
 .elementor-element-wmfsh7gq .twbb_cta-button,
@@ -720,13 +1621,13 @@ nav.twbb-nav-menu__container a,
   font-size: 0.95rem !important;
 }
 
-.elementor-element-mpmj2ts1 > .elementor-element {
+.elementor-element-mpmj2ts1>.elementor-element {
   flex: 1 1 200px !important;
   min-width: 200px;
   display: flex !important;
 }
 
-.elementor-element-mpmj2ts1 > .elementor-element > .elementor-widget-container {
+.elementor-element-mpmj2ts1>.elementor-element>.elementor-widget-container {
   display: flex !important;
   flex: 1 !important;
   width: 100% !important;
@@ -757,6 +1658,7 @@ nav.twbb-nav-menu__container a,
 .elementor-element-62omublh .elementor-element-endd3yzw {
   width: 100% !important;
 }
+
 .elementor-element-09r9ewp1 .elementor-element-ya3w1y73 .elementor-heading-title,
 .elementor-element-09r9ewp1 .elementor-element-ya3w1y73 .elementor-widget-container,
 .elementor-element-62omublh .elementor-element-endd3yzw .elementor-heading-title,
@@ -771,18 +1673,22 @@ nav.twbb-nav-menu__container a,
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
 }
+
 .elementor-posts-container:has(.twbb-news-source) .elementor-post__read-more-wrapper {
   display: none !important;
 }
+
 .elementor-posts-container:has(.twbb-news-source) .twbb-news-card .elementor-post__title {
   text-align: left !important;
 }
+
 .elementor-posts-container:has(.twbb-news-source) .twbb-news-tags {
   display: flex !important;
   flex-wrap: wrap !important;
   gap: 0.35rem !important;
   justify-content: center !important;
 }
+
 .elementor-posts-container:has(.twbb-news-source) .twbb-news-tag {
   font-size: 0.75rem !important;
   padding: 0.2rem 0.5rem !important;
@@ -790,22 +1696,26 @@ nav.twbb-nav-menu__container a,
   background: #e8e8e8 !important;
   color: #333 !important;
 }
+
 @media (max-width: 1024px) {
   .elementor-posts-container:has(.twbb-news-source) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 600px) {
   .elementor-posts-container:has(.twbb-news-source) {
     grid-template-columns: 1fr;
   }
 }
+
 .elementor-posts-container:has(.twbb-news-source) .twbb-news-card {
   border: 1px solid #444;
   border-radius: 6px;
   padding: 1rem;
   box-sizing: border-box;
 }
+
 .elementor-posts-container:has(.twbb-news-source) .twbb-news-card .twbb-image-container {
   display: none !important;
 }
@@ -816,21 +1726,26 @@ body.page-id-147 .elementor-posts-container {
   grid-template-columns: repeat(4, 1fr) !important;
   gap: 1.25rem !important;
 }
+
 body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
   grid-template-columns: repeat(4, 1fr);
 }
+
 @media (max-width: 1024px) {
   body.page-id-147 .elementor-posts-container {
     grid-template-columns: repeat(2, 1fr) !important;
   }
+
   body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 600px) {
   body.page-id-147 .elementor-posts-container {
     grid-template-columns: 1fr !important;
   }
+
   body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
     grid-template-columns: 1fr;
   }
@@ -842,15 +1757,18 @@ body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
   max-width: 1200px;
   margin: 0 auto;
 }
+
 .twbb-company-update-title {
   margin-bottom: 1rem !important;
 }
+
 .twbb-whats-new-card {
   border: 1px solid #444;
   border-radius: 8px;
   overflow: hidden;
   background: #fafafa;
 }
+
 .twbb-whats-new-heading {
   margin: 0;
   padding: 1rem 1.25rem;
@@ -858,11 +1776,13 @@ body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
   border-bottom: 1px solid #e0e0e0;
   background: #fff;
 }
+
 .twbb-whats-new-scroll {
   max-height: 320px;
   overflow-y: auto;
   padding: 1rem 1.25rem;
 }
+
 .twbb-whats-new-row {
   display: flex;
   gap: 1.5rem;
@@ -870,34 +1790,40 @@ body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
   padding: 0.75rem 0;
   border-bottom: 1px solid #eee;
 }
+
 .twbb-whats-new-datetime {
   flex: 0 0 140px;
   font-size: 0.9rem;
   color: #555;
 }
+
 .twbb-whats-new-events {
   flex: 1;
 }
 
 /* FAQ page: title + description left, questions right, same level (top-aligned) */
-.elementor-element-7blqyvt1 > .e-con-inner {
+.elementor-element-7blqyvt1>.e-con-inner {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) !important;
   gap: 2rem 3rem !important;
   align-items: start !important;
 }
+
 .elementor-element-7blqyvt1 .elementor-element-xse7bmtm,
 .elementor-element-7blqyvt1 .elementor-element-sagcuj9u {
   grid-column: 1 !important;
 }
+
 .elementor-element-7blqyvt1 .elementor-element-cwgzm7yo {
   grid-column: 2 !important;
   grid-row: 1 / -1 !important;
 }
+
 @media (max-width: 768px) {
-  .elementor-element-7blqyvt1 > .e-con-inner {
+  .elementor-element-7blqyvt1>.e-con-inner {
     grid-template-columns: 1fr !important;
   }
+
   .elementor-element-7blqyvt1 .elementor-element-cwgzm7yo {
     grid-column: 1 !important;
     grid-row: auto !important;
@@ -911,6 +1837,7 @@ body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
   max-width: 100% !important;
   min-width: 0 !important;
 }
+
 .elementor-element-wbjabwhb .elementor-widget-container,
 .elementor-element-wbjabwhb .twbb_cta-wrapper,
 .elementor-element-wbjabwhb .twbb_cta-content-wrapper,
@@ -918,28 +1845,35 @@ body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
   max-width: 100% !important;
   width: 100% !important;
   min-width: 100% !important;
-  min-width: min(100%, 1200px) !important; /* fallback: older browsers use line above */
+  min-width: min(100%, 1200px) !important;
+  /* fallback: older browsers use line above */
 }
+
 .elementor-element-wbjabwhb .contact-email-template {
   max-width: 100% !important;
   width: 100% !important;
   min-width: 100% !important;
-  min-width: min(100%, 1200px) !important; /* fallback: older browsers use line above */
+  min-width: min(100%, 1200px) !important;
+  /* fallback: older browsers use line above */
 }
+
 /* Contact card image (customer support / get in touch) */
 .elementor-element-wbjabwhb .twbb_cta-image-background-wrapper {
   min-height: 140px;
 }
+
 .elementor-element-wbjabwhb .twbb_cta-image-html-tag {
   overflow: hidden !important;
   background: rgba(0, 0, 0, 0.2) !important;
 }
+
 .elementor-element-wbjabwhb .twbb_cta-image-html-tag img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
   display: block !important;
 }
+
 .elementor-element-wbjabwhb .twbb_cta-image-html-tag img[src^="data:image/svg"] {
   opacity: 0 !important;
   min-height: 140px !important;
@@ -953,6 +1887,7 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
+
 body {
   overflow-x: hidden;
   max-width: 100vw;
@@ -973,6 +1908,7 @@ nav.twbb-nav-menu__container a,
 
 /* Minimum touch target size (WCAG ~44px) for nav and main CTAs */
 @media (max-width: 768px) {
+
   nav.twbb-nav-menu__container a,
   .twbb-item {
     min-height: 44px !important;
@@ -980,6 +1916,7 @@ nav.twbb-nav-menu__container a,
     display: inline-flex !important;
     align-items: center !important;
   }
+
   .elementor-button,
   .twbb_cta-button,
   a.elementor-button,
@@ -990,6 +1927,7 @@ nav.twbb-nav-menu__container a,
     align-items: center !important;
     justify-content: center !important;
   }
+
   .twbb-menu-toggle {
     min-width: 44px !important;
     min-height: 44px !important;
@@ -1011,6 +1949,7 @@ nav.twbb-nav-menu__container a,
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
+
   .elementor-element-yaekp2ga .e-con-inner {
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
@@ -1019,10 +1958,11 @@ nav.twbb-nav-menu__container a,
 
 /* Service cards: single column on narrow phones (avoid min-width overflow) */
 @media (max-width: 480px) {
-  .elementor-element-mpmj2ts1 > .elementor-element {
+  .elementor-element-mpmj2ts1>.elementor-element {
     min-width: 0 !important;
     flex: 1 1 100% !important;
   }
+
   .elementor-element-wmfsh7gq {
     grid-template-columns: 1fr !important;
   }
@@ -1034,6 +1974,7 @@ nav.twbb-nav-menu__container a,
     flex-direction: column !important;
     gap: 0.5rem !important;
   }
+
   .twbb-whats-new-datetime {
     flex: 0 0 auto !important;
   }
@@ -1041,6 +1982,7 @@ nav.twbb-nav-menu__container a,
 
 /* Tables and contact: prevent overflow on phones */
 @media (max-width: 768px) {
+
   .elementor-element-wbjabwhb .contact-email-template table,
   .contact-email-template table {
     display: block !important;
@@ -1054,6 +1996,7 @@ nav.twbb-nav-menu__container a,
   body {
     font-size: 16px;
   }
+
   input[type="text"],
   input[type="email"],
   input[type="tel"],
@@ -1071,6 +2014,7 @@ nav.twbb-nav-menu__container a {
   -webkit-user-select: none;
   user-select: none;
 }
+
 /* Focus visible for keyboard users (all browsers) */
 .elementor-toggle .elementor-tab-title:focus-visible,
 .twbb-menu-toggle:focus-visible,
@@ -1078,7 +2022,9 @@ nav.twbb-nav-menu__container a {
   outline: 2px solid currentColor;
   outline-offset: 2px;
 }
+
 @supports not selector(:focus-visible) {
+
   .elementor-toggle .elementor-tab-title:focus,
   .twbb-menu-toggle:focus,
   .elementor-button:focus {
@@ -1086,18 +2032,89 @@ nav.twbb-nav-menu__container a {
     outline-offset: 2px;
   }
 }
+
 /* Touch: same behavior on iOS Safari, Chrome Android, Firefox Mobile, Edge */
 a.elementor-toggle-title {
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0.08);
   tap-highlight-color: rgba(0, 0, 0, 0.08);
 }
+
 /* Scroll and overflow consistency (Safari vs others) */
 html {
   -webkit-overflow-scrolling: touch;
 }
+
 @media (max-width: 768px) {
   .elementor-toggle .elementor-tab-content {
     -webkit-overflow-scrolling: touch;
   }
+}
+
+/* Sub-service hero: ensure black text wins over theme (high specificity, end of file) */
+body .elementor-element-q0cugbsk .e-con-inner,
+body .elementor-element-q0cugbsk .elementor-widget-container,
+body .elementor-element-q0cugbsk .twbb-headline,
+body .elementor-element-q0cugbsk .twbb-headline *,
+body .elementor-element-q0cugbsk h1,
+body .elementor-element-wvf7j5xq .e-con-inner,
+body .elementor-element-wvf7j5xq .elementor-widget-container,
+body .elementor-element-wvf7j5xq .twbb-headline,
+body .elementor-element-wvf7j5xq .twbb-headline *,
+body .elementor-element-wvf7j5xq h1,
+body .elementor-element-ihtx4g4l .e-con-inner,
+body .elementor-element-ihtx4g4l .elementor-widget-container,
+body .elementor-element-ihtx4g4l .twbb-headline,
+body .elementor-element-ihtx4g4l .twbb-headline *,
+body .elementor-element-ihtx4g4l h1 {
+  color: #000 !important;
+}
+
+body .elementor-element-q0cugbsk .elementor-button,
+body .elementor-element-q0cugbsk .elementor-button .elementor-button-text,
+body .elementor-element-wvf7j5xq .elementor-button,
+body .elementor-element-wvf7j5xq .elementor-button .elementor-button-text,
+body .elementor-element-ihtx4g4l .elementor-button,
+body .elementor-element-ihtx4g4l .elementor-button .elementor-button-text {
+  color: #000 !important;
+  border-color: #000 !important;
+}
+
+/* Override theme headline widget (twbb-headline--style-highlight) on sub-service hero */
+body .elementor-element-q0cugbsk .twbb-headline--style-highlight,
+body .elementor-element-q0cugbsk .twbb-headline--style-highlight *,
+body .elementor-element-wvf7j5xq .twbb-headline--style-highlight,
+body .elementor-element-wvf7j5xq .twbb-headline--style-highlight *,
+body .elementor-element-ihtx4g4l .twbb-headline--style-highlight,
+body .elementor-element-ihtx4g4l .twbb-headline--style-highlight * {
+  color: #000 !important;
+}
+
+/* Sub-service hero height (high specificity so it wins over theme/aggregated CSS) */
+body .elementor-element-q0cugbsk.twbb_section.twbb_full_h,
+body .elementor-element-wvf7j5xq.twbb_section.twbb_full_h,
+body .elementor-element-ihtx4g4l.twbb_section.twbb_full_h {
+  min-height: 180vh !important;
+  height: 180vh !important;
+}
+
+/* Sub-service hero: scoped to section 7f979378 (where the hero lives) so it always wins */
+.elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_section.twbb_full_h,
+.elementor-element-7f979378 .elementor-element-wvf7j5xq.twbb_section.twbb_full_h,
+.elementor-element-7f979378 .elementor-element-ihtx4g4l.twbb_section.twbb_full_h {
+  min-height: 180vh !important;
+  height: 180vh !important;
+}
+
+/* AI Infrastructure page only: reduce hero to half of 180vh */
+body.page-id-149 .elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_section.twbb_full_h {
+  min-height: 35vh !important;
+  height: 35vh !important;
+}
+
+/* Payment process step cards: dark grey border (high specificity so it shows) */
+.auramind-payment-process-card .auramind-payment-process-steps .auramind-payment-step,
+body .auramind-payment-process-steps .auramind-payment-step {
+  border: 2px solid #374151 !important;
+  border-radius: 8px !important;
 }

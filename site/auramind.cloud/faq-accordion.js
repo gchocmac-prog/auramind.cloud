@@ -17,8 +17,16 @@
       if (!title) return;
       e.preventDefault();
       e.stopPropagation();
-      title.classList.toggle('elementor-active');
-      title.setAttribute('aria-expanded', title.classList.contains('elementor-active') ? 'true' : 'false');
+      var wasActive = title.classList.contains('elementor-active');
+      var allTitles = container.querySelectorAll('.elementor-tab-title');
+      for (var i = 0; i < allTitles.length; i++) {
+        allTitles[i].classList.remove('elementor-active');
+        allTitles[i].setAttribute('aria-expanded', 'false');
+      }
+      if (!wasActive) {
+        title.classList.add('elementor-active');
+        title.setAttribute('aria-expanded', 'true');
+      }
     };
 
     container.addEventListener('click', handler, false);
