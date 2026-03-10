@@ -7,6 +7,34 @@
   --auramind-card-logo-green: #16a34a;
 }
 
+/* Site-wide: body text 1 unit (1px) larger – paragraphs, lists, descriptions; excludes headers/titles */
+body p,
+body li,
+.elementor-icon-box-description,
+.twbb_cta-description,
+.twbb_cta-suitable,
+.elementor-widget-text-editor,
+.elementor-form-text-after-description-wrapper,
+.elementor-field-group .elementor-field-textual {
+  font-size: calc(1em + 1px) !important;
+}
+
+/* Cards with dark grey border: text (not titles) +1 unit (services page cards handled below) */
+.elementor-element-widerange-cta-wrap .twbb_cta-description,
+.elementor-element-widerange-cta-wrap .twbb_cta-suitable,
+.elementor-posts-container:has(.twbb-news-source) .twbb-news-card .elementor-post__excerpt,
+.elementor-posts-container:has(.twbb-news-source) .twbb-news-card .elementor-post__meta,
+body.page-id-147 .elementor-posts-container .twbb-news-card .elementor-post__excerpt,
+body.page-id-147 .elementor-posts-container .twbb-news-card .elementor-post__meta,
+.twbb-whats-new-card .twbb-whats-new-scroll,
+.twbb-whats-new-card .twbb-whats-new-row,
+.auramind-payment-step .auramind-payment-step-title,
+.auramind-payment-step .auramind-payment-step-body,
+.auramind-flip-card-back .auramind-flip-card-list,
+.auramind-flip-card-back .auramind-flip-card-list li {
+  font-size: calc(1em + 1px) !important;
+}
+
 /* Return to previous page button on service sub-pages (left-aligned) */
 .auramind-return-to-services {
   padding: 1.5rem 0 1.5rem 20px !important;
@@ -223,26 +251,17 @@ body .elementor-element.elementor-invisible,
   opacity: 1 !important;
 }
 
-/* Header logo: always show and link to home when img is placeholder or 404 (Chrome/Firefox) */
+/* Header logo: show logo image and link to home */
 .elementor-element-e1q9sn27 .elementor-widget-container a {
   display: block !important;
   min-height: 60px !important;
-  background: url(/assets/logo-header.jpg) no-repeat left center !important;
-  background-size: contain !important;
 }
 
-.elementor-element-e1q9sn27 .elementor-widget-container img:not([src^="/assets/"]) {
-  opacity: 0 !important;
-  position: absolute !important;
-  pointer-events: none !important;
-  width: 100% !important;
+.elementor-element-e1q9sn27 .elementor-widget-container img {
+  display: block !important;
+  max-height: 60px !important;
+  width: auto !important;
   height: auto !important;
-  min-height: 60px !important;
-}
-
-.elementor-element-e1q9sn27 .elementor-widget-container img[src^="/assets/logo-header"] {
-  opacity: 1 !important;
-  position: relative !important;
 }
 
 /* About Us: force Get in touch section visible (Chrome/Firefox when JS fails) */
@@ -318,11 +337,12 @@ body.page-id-146 .elementor-element-75f67604 {
 }
 
 /* Sub-service hero gradient (fix-interaction.css): grey-to-transparent.
-   Used on AI Infrastructure Management (149), AI Server Rentals (150).
+   Used on AI Infrastructure Management (149), AI Server Rentals (150), AI IT Services (152).
    Section 7f979378 wraps hero and page body; the hero is the .twbb_full_h container.
    Force full width and coverage so gradient is not confined to a boxed corner. */
 body.page-id-149 .elementor-element-7f979378 .twbb_section.twbb_full_h,
-body.page-id-150 .elementor-element-7f979378 .twbb_section.twbb_full_h {
+body.page-id-150 .elementor-element-7f979378 .twbb_section.twbb_full_h,
+body.page-id-152 .elementor-element-7f979378 .twbb_section.twbb_full_h {
   background-image: linear-gradient(180deg, #e5e7eb 0%, transparent 100%) !important;
   background-color: transparent !important;
   background-repeat: no-repeat !important;
@@ -1440,9 +1460,9 @@ body::before {
   margin-top: auto !important;
 }
 
-/* Same title size and line clamp (-webkit for Safari/Chrome, overflow fallback for others) */
+/* Same title size and line clamp (-webkit for Safari/Chrome, overflow fallback for others); +2 units */
 .elementor-element-wmfsh7gq .twbb_cta-title {
-  font-size: 1.15rem !important;
+  font-size: calc(1.15rem + 2px) !important;
   line-height: 1.35 !important;
   margin: 0 0 0.75rem 0 !important;
   display: -webkit-box !important;
@@ -1451,9 +1471,9 @@ body::before {
   overflow: hidden !important;
 }
 
-/* Same description font size and area so button aligns */
+/* Same description font size and area so button aligns; +2 units for card text */
 .elementor-element-wmfsh7gq .twbb_cta-description {
-  font-size: 0.9375rem !important;
+  font-size: calc(0.9375rem + 2px) !important;
   line-height: 1.5 !important;
   flex: 1 !important;
   min-height: 3.5em !important;
@@ -1464,12 +1484,17 @@ body::before {
   font-size: inherit !important;
 }
 
-/* Same button style for all service cards: blue Learn More */
+/* Services page cards: "Suitable for..." +2 units */
+.elementor-element-wmfsh7gq .twbb_cta-suitable {
+  font-size: calc(0.9rem + 2px) !important;
+}
+
+/* Same button style for all service cards: blue Learn More; +2 units */
 .elementor-element-wmfsh7gq .twbb_cta-button,
 .elementor-element-wmfsh7gq a.twbb_cta-button.elementor-button {
   display: inline-block !important;
   padding: 0.6em 1.2em !important;
-  font-size: 0.95rem !important;
+  font-size: calc(0.95rem + 2px) !important;
   font-weight: 600 !important;
   text-align: center !important;
   border: 2px solid #2563eb !important;
@@ -1502,21 +1527,20 @@ body::before {
   color: #fff !important;
 }
 
-/* Services page cards: hide logos/images at top of cards */
+/* Services page cards: fixed image height so card titles align evenly */
 .elementor-element-wmfsh7gq .twbb_cta-image-background-wrapper {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
-  max-height: 0 !important;
-  overflow: hidden !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
   flex-shrink: 0 !important;
 }
 
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag {
-  display: none !important;
-  height: 0 !important;
-  min-height: 0 !important;
   overflow: hidden !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  height: 200px !important;
+  min-height: 200px !important;
+  max-height: 200px !important;
 }
 
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag img {
@@ -1537,12 +1561,7 @@ body::before {
   min-height: 120px !important;
 }
 
-/* AI IT Services (152): hero content card 30% wider than default (e.g. 1200px → 1560px) */
-body.page-id-152 .elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_section.twbb_full_h,
-body.page-id-152 .elementor-element-7f979378 .elementor-element-q0cugbsk .e-con-inner {
-  max-width: min(1560px, 95%) !important;
-  width: 100% !important;
-}
+/* AI IT Services (152): hero same as ai-infrastructure-management (149) – gradient applied above; content width unchanged */
 
 /* AI IT Services (152): Planning section – no left "Planning Stage" block; 4 cards centre-aligned */
 body.page-id-152 .auramind-planning-row.auramind-planning-four-cards {
@@ -1681,12 +1700,20 @@ body.page-id-145 .elementor-element-wmfsh7gq .auramind-coming-soon-section {
   min-width: 0 !important;
   width: 100% !important;
   display: flex !important;
+  flex-direction: row !important;
   align-items: center !important;
   justify-content: center !important;
+  justify-self: center !important;
+  align-self: center !important;
   padding: 1.5rem 1rem !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
 body.page-id-145 .elementor-element-wmfsh7gq .auramind-coming-soon-section .auramind-coming-soon-heading {
-  margin: 0 !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
   font-size: 1.5rem !important;
   font-weight: 700 !important;
   color: #111 !important;
@@ -2231,11 +2258,17 @@ body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
   margin-bottom: 1rem !important;
 }
 
+/* What's New table: height locked (moveable, width adjustable, height fixed) */
 .twbb-whats-new-card {
   border: 1px solid #444;
   border-radius: 8px;
   overflow: hidden;
   background: #fafafa;
+  height: 400px !important;
+  min-height: 400px !important;
+  max-height: 400px !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .twbb-whats-new-heading {
@@ -2244,12 +2277,18 @@ body.page-id-147 .elementor-posts-container:has(.twbb-news-source) {
   font-size: 1.1rem;
   border-bottom: 1px solid #e0e0e0;
   background: #fff;
+  flex: 0 0 auto !important;
 }
 
 .twbb-whats-new-scroll {
-  max-height: 320px;
-  overflow-y: auto;
+  height: 320px !important;
+  min-height: 320px !important;
+  max-height: 320px !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   padding: 1rem 1.25rem;
+  flex: 0 0 320px !important;
 }
 
 .twbb-whats-new-row {
