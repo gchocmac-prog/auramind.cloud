@@ -33,6 +33,188 @@
   color: #fff !important;
 }
 
+/* Payment Stage (ai-operation-and-maintenance): title block on top, 4 flip cards below, same width */
+.auramind-payment-stage-row .auramind-flip-cards-wrap {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  align-items: stretch !important;
+  margin-top: 1.5rem !important;
+}
+.auramind-flip-cards-wrap {
+  flex: 1;
+  min-width: 0;
+  align-items: stretch;
+}
+.auramind-flip-cards-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-rows: auto !important;
+  grid-auto-flow: column !important;
+  align-items: stretch !important;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+@media (max-width: 768px) {
+  .auramind-flip-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-auto-flow: row !important;
+  }
+}
+@media (max-width: 480px) {
+  .auramind-flip-cards-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-flow: row !important;
+  }
+}
+/* Flip card height: all cards match the tallest (grid row = max content height) */
+.auramind-flip-card {
+  position: relative;
+  height: 100%;
+  min-height: 320px;
+  perspective: 800px;
+  cursor: pointer;
+  outline: none;
+}
+.auramind-flip-card:focus-visible {
+  outline: 2px solid var(--auramind-card-logo-green, #16a34a);
+  outline-offset: 2px;
+}
+.auramind-flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+.auramind-flip-card:hover .auramind-flip-card-inner,
+.auramind-flip-card.flipped .auramind-flip-card-inner {
+  transform: rotateY(180deg);
+}
+.auramind-flip-card-front,
+.auramind-flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  background: #bae6fd;
+  color: #000;
+  text-align: center;
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+.auramind-flip-card-front::after,
+.auramind-flip-card-back::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.25) 45%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.25) 55%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-position: 150% 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.auramind-flip-card:hover .auramind-flip-card-front::after,
+.auramind-flip-card:hover .auramind-flip-card-back::after,
+.auramind-flip-card.flipped .auramind-flip-card-back::after {
+  opacity: 1;
+  animation: auramind-card-shine 0.8s ease-out forwards;
+}
+@keyframes auramind-card-shine {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -50% 0;
+  }
+}
+.auramind-flip-card-front {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.auramind-flip-card-logo {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.auramind-flip-card-logo img {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  object-fit: contain;
+  display: block;
+  font-size: 0;
+  color: transparent;
+}
+/* DeepSeek logo: no blend on light card background */
+.auramind-flip-card-logo-deepseek img {
+  mix-blend-mode: normal;
+}
+.auramind-flip-card-title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  color: #000;
+}
+.auramind-flip-card-back {
+  transform: rotateY(180deg);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: left;
+  justify-content: flex-start;
+  overflow-y: auto;
+  color: #000;
+}
+.auramind-flip-card-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  list-style: disc;
+  width: 100%;
+  color: #000;
+}
+.auramind-flip-card-list li {
+  margin-bottom: 0.35rem;
+  color: #000;
+}
+.auramind-flip-card-list li:last-child {
+  margin-bottom: 0;
+}
+
 /* Site-wide: show content when animation JS doesn't run (e.g. Chrome/Firefox with blocked/404 scripts) */
 .elementor-invisible,
 body .elementor-element.elementor-invisible,
@@ -135,13 +317,61 @@ body.page-id-146 .elementor-element-75f67604 {
   background: none !important;
 }
 
-/* Sub-service pages: grey-to-transparent gradient on the HERO BLOCK only (not the whole section).
-   The section 7f979378 wraps both hero and page body; the hero is the .twbb_full_h container. */
+/* Sub-service hero gradient (fix-interaction.css): grey-to-transparent.
+   Used on AI Infrastructure Management (149), AI Server Rentals (150).
+   Section 7f979378 wraps hero and page body; the hero is the .twbb_full_h container.
+   Force full width and coverage so gradient is not confined to a boxed corner. */
 body.page-id-149 .elementor-element-7f979378 .twbb_section.twbb_full_h,
-body.page-id-150 .elementor-element-7f979378 .twbb_section.twbb_full_h,
-body.page-id-151 .elementor-element-7f979378 .twbb_section.twbb_full_h {
+body.page-id-150 .elementor-element-7f979378 .twbb_section.twbb_full_h {
   background-image: linear-gradient(180deg, #e5e7eb 0%, transparent 100%) !important;
   background-color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: 0 0 !important;
+  background-size: 100% 100% !important;
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+
+/* AI Operation and Maintenance (151): same gradient as ai-it-services – full-width via section ::before (40vh) */
+body.page-id-151 .elementor-element-7f979378 {
+  position: relative !important;
+  min-height: 40vh !important;
+}
+body.page-id-151 .elementor-element-7f979378::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  height: 40vh !important;
+  min-height: 40vh !important;
+  background-image: linear-gradient(180deg, #e5e7eb 0%, transparent 100%) !important;
+  background-color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: 0 0 !important;
+  background-size: 100% 100% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+body.page-id-151 .elementor-element-7f979378 .elementor-column,
+body.page-id-151 .elementor-element-7f979378 .elementor-widget-wrap {
+  position: relative !important;
+  z-index: 1 !important;
+  width: 100% !important;
+  max-width: none !important;
+}
+body.page-id-151 .elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_section.twbb_full_h {
+  background-image: none !important;
+  background-color: transparent !important;
+  background-repeat: no-repeat !important;
+  background-position: 0 0 !important;
+  background-size: 100% 100% !important;
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
 }
 
 /* Hero section: title and text white in all browsers (home + services) */
@@ -179,9 +409,6 @@ body.page-id-151 .elementor-element-7f979378 .twbb_section.twbb_full_h {
 }
 
 /* Sub-service hero: remove black/grey background so it’s transparent */
-.elementor-element-q0cugbsk,
-.elementor-element-wvf7j5xq,
-.elementor-element-ihtx4g4l,
 .elementor-element-q0cugbsk::before,
 .elementor-element-q0cugbsk::after,
 .elementor-element-wvf7j5xq::before,
@@ -192,12 +419,12 @@ body.page-id-151 .elementor-element-7f979378 .twbb_section.twbb_full_h {
   background-image: none !important;
 }
 
-/* Sub-service hero: height 180vh (50% taller than previous 120vh) */
+/* Sub-service hero: height 2/5 of viewport (40vh) */
 .elementor-element-q0cugbsk,
 .elementor-element-wvf7j5xq,
 .elementor-element-ihtx4g4l {
-  min-height: 180vh !important;
-  height: 180vh !important;
+  min-height: 40vh !important;
+  height: 40vh !important;
 }
 
 /* Sub-service hero: force all text and buttons to black (high specificity to override theme) */
@@ -312,6 +539,61 @@ body.page-id-145 .elementor-element-7f979378 .elementor-widget-wrap {
   background-image: none !important;
 }
 
+/* Services page: hero section height reduced by half */
+body.page-id-145 .elementor-element-7f979378 .elementor-element-8l02zu5w.twbb_section.twbb_full_h {
+  min-height: 50vh !important;
+  height: 50vh !important;
+}
+
+/* Services page: grey gradient behind "Wide range" content – full viewport width, no side margins */
+body.page-id-145 .elementor-element-7f979378 {
+  position: relative !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  left: 0 !important;
+  right: 0 !important;
+  box-sizing: border-box !important;
+}
+body.page-id-145 .elementor-element-7f979378::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 50vh !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  bottom: 0 !important;
+  min-height: 50vh !important;
+  background: linear-gradient(180deg, #f8f8f8 0%, #f0f0f0 100%) !important;
+  background-color: #f5f5f5 !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+/* So the full-width gradient shows through (services content container) */
+body.page-id-145 .elementor-element-x4h0mwb6,
+body.page-id-145 .elementor-element-x4h0mwb6 .e-con-inner {
+  background-color: transparent !important;
+  background-image: none !important;
+  max-width: none !important;
+  width: 100% !important;
+}
+
+/* Allow full-width hero section to extend edge-to-edge (no clipping by body) */
+body.page-id-145 {
+  overflow-x: visible !important;
+}
+body.page-id-145 .elementor-145 {
+  overflow-x: visible !important;
+  max-width: none !important;
+}
+/* Services hero section: force full viewport width so gradient covers page horizontally */
+body.page-id-145 .elementor-element-7f979378 .elementor-container {
+  max-width: none !important;
+  width: 100% !important;
+}
+
 /* Sub-service hero: content in the middle, all centre-aligned */
 .elementor-element-q0cugbsk .e-con-inner,
 .elementor-element-wvf7j5xq .e-con-inner,
@@ -390,6 +672,13 @@ body.page-id-151 .elementor-element-sulx42kb {
   margin-right: auto !important;
   width: 50% !important;
   max-width: 50% !important;
+  /* White card, rounded corners */
+  background: #fff !important;
+  background-image: none !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+  padding: 2.5rem 2rem !important;
+  box-sizing: border-box !important;
 }
 
 /* AI Operation page: make benefits card 20% wider (50% -> 60%) */
@@ -437,11 +726,16 @@ body.page-id-151 .elementor-element-q0cugbsk .e-con-inner > .elementor-element-4
 
 .auramind-benefits-card-section .elementor-heading-title {
   font-size: 1.95rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 1.25rem 0 !important;
+  color: #111 !important;
 }
 
 .auramind-benefits-card-section .elementor-widget-container {
   font-size: 1.125rem !important;
-  line-height: 1.6 !important;
+  line-height: 1.7 !important;
+  margin: 0 !important;
+  color: #374151 !important;
 }
 
 /* Planning Stage & Payment Stage: font sizes 2 units larger */
@@ -674,10 +968,12 @@ body.page-id-151 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row
 /* Payment Stage row: same width, minimal gap so left block sits right next to the two cards; padding 28px; centered on page. */
 .auramind-planning-row.auramind-payment-stage-row {
   flex: 0 0 auto !important;
+  flex-direction: column !important;
   min-width: 0 !important;
   width: 878px !important;
   max-width: 100% !important;
   align-self: stretch !important;
+  align-items: stretch !important;
   margin-left: auto !important;
   margin-right: auto !important;
   gap: clamp(1.5rem, 4vw, 2.5rem) !important;
@@ -714,18 +1010,20 @@ body.page-id-151 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row
   text-align: left !important;
 }
 
-/* Payment Stage left: shrink to content so cards sit right next to it (no big gap) */
+/* Payment Stage: title block full width on top, centre aligned */
 .auramind-payment-stage-row .auramind-planning-card-left {
-  flex: 0 0 38% !important;
-  width: auto !important;
-  max-width: 38% !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  text-align: center !important;
 }
 
-/* Payment Stage left card: fixed width for heading and text (browser preview) */
+/* Payment Stage title block: full width, centre aligned */
 .auramind-payment-stage-row .auramind-planning-card-left .elementor-widget-container,
 .auramind-payment-stage-row .auramind-planning-card-left h2.elementor-heading-title {
-  width: 312px !important;
+  width: 100% !important;
   max-width: 100% !important;
+  text-align: center !important;
 }
 
 /* Icon-box "Scalable Solutions" (kkdhwecu) in Planning/Payment right slot: fixed width (browser preview) */
@@ -875,8 +1173,10 @@ body.page-id-151 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row
 
   /* Both right slots: allow empty area to collapse when stacked so section heights match */
   .elementor-element-43ggwszp.auramind-two-cards-stack,
-  .auramind-payment-stage-row .auramind-payment-stage-right {
+  .auramind-payment-stage-row .auramind-payment-stage-right,
+  .auramind-payment-stage-row .auramind-flip-cards-wrap {
     min-height: 0 !important;
+    flex: 1 1 100% !important;
   }
 }
 
@@ -954,7 +1254,13 @@ body.page-id-151 .elementor-element-sulx42kb .e-con-inner>.auramind-planning-row
   .elementor-element-wvf7j5xq,
   .elementor-element-ihtx4g4l {
     background-color: transparent !important;
-    background-image: none !important;
+    background-image: linear-gradient(180deg, #e5e7eb 0%, transparent 100%) !important;
+    background-repeat: no-repeat !important;
+    background-position: 0 0 !important;
+    background-size: 100% 100% !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-sizing: border-box !important;
   }
 
   /* Header + nav: horizontal layout, no hamburger */
@@ -1196,20 +1502,21 @@ body::before {
   color: #fff !important;
 }
 
-/* Fixed image height so card titles align evenly across the 2x2 grid */
+/* Services page cards: hide logos/images at top of cards */
 .elementor-element-wmfsh7gq .twbb_cta-image-background-wrapper {
-  height: 200px !important;
-  min-height: 200px !important;
-  max-height: 200px !important;
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
   flex-shrink: 0 !important;
 }
 
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag {
+  display: none !important;
+  height: 0 !important;
+  min-height: 0 !important;
   overflow: hidden !important;
-  background: rgba(0, 0, 0, 0.3) !important;
-  height: 200px !important;
-  min-height: 200px !important;
-  max-height: 200px !important;
 }
 
 .elementor-element-wmfsh7gq .twbb_cta-image-html-tag img {
@@ -1230,6 +1537,62 @@ body::before {
   min-height: 120px !important;
 }
 
+/* AI IT Services (152): hero content card 30% wider than default (e.g. 1200px → 1560px) */
+body.page-id-152 .elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_section.twbb_full_h,
+body.page-id-152 .elementor-element-7f979378 .elementor-element-q0cugbsk .e-con-inner {
+  max-width: min(1560px, 95%) !important;
+  width: 100% !important;
+}
+
+/* AI IT Services (152): Planning section – no left "Planning Stage" block; 4 cards centre-aligned */
+body.page-id-152 .auramind-planning-row.auramind-planning-four-cards {
+  justify-content: center !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+body.page-id-152 .auramind-planning-row.auramind-planning-four-cards .auramind-four-cards-wrap {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  gap: clamp(1rem, 2vw, 1.5rem) !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+  max-width: min(1200px, 98%) !important;
+  min-width: 0 !important;
+}
+body.page-id-152 .auramind-planning-row.auramind-planning-four-cards .auramind-four-cards-wrap > .elementor-widget-icon-box,
+body.page-id-152 .auramind-planning-row.auramind-planning-four-cards .auramind-four-cards-wrap > .elementor-element {
+  flex: 1 1 min(220px, 100%) !important;
+  min-width: 0 !important;
+  max-width: calc(50% - 0.5rem) !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 6px !important;
+  padding: 1rem !important;
+  box-sizing: border-box !important;
+}
+@media (min-width: 769px) {
+  body.page-id-152 .auramind-planning-row.auramind-planning-four-cards .auramind-four-cards-wrap > .elementor-widget-icon-box,
+  body.page-id-152 .auramind-planning-row.auramind-planning-four-cards .auramind-four-cards-wrap > .elementor-element {
+    flex: 1 1 0 !important;
+    max-width: calc(33.333% - 0.75rem) !important;
+  }
+}
+/* AI IT Services (152): hide icons/logos on planning cards */
+body.page-id-152 .auramind-planning-row.auramind-planning-four-cards .elementor-icon-box-icon {
+  display: none !important;
+}
+/* AI IT Services (152): hide 4th planning card; show only Sourcing, Customization, Cooperation */
+body.page-id-152 .auramind-planning-row.auramind-planning-four-cards .auramind-four-cards-wrap > .elementor-element:nth-child(4) {
+  display: none !important;
+}
+/* AI IT Services (152): hide Payment Process and Payment Stage (quotation row and rest of body content) */
+body.page-id-152 .auramind-payment-process-card,
+body.page-id-152 .auramind-planning-row.auramind-payment-stage-row {
+  display: none !important;
+}
+
 /* Wide range card (last, centred): 30% wider than other service cards */
 .elementor-element-widerange-cta-wrap {
   flex: 1 1 416px !important;
@@ -1246,6 +1609,112 @@ body::before {
   max-width: none !important;
   margin: 0 !important;
   justify-content: stretch !important;
+}
+
+/* Services page: all cards same size as Wide range card (~780px × 470px), centered */
+body.page-id-145 .elementor-element-wmfsh7gq {
+  grid-template-columns: repeat(2, 780px) !important;
+  grid-template-rows: auto auto auto auto !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  gap: 1.25rem !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+@media (max-width: 1620px) {
+  body.page-id-145 .elementor-element-wmfsh7gq {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+body.page-id-145 .elementor-element-wmfsh7gq > .elementor-element {
+  display: flex !important;
+  min-height: 0 !important;
+  max-width: 780px !important;
+  width: 100% !important;
+}
+body.page-id-145 .elementor-element-wmfsh7gq .elementor-element-fu80s1ih {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+}
+body.page-id-145 .elementor-element-wmfsh7gq .elementor-element-p5ev0jh6 {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+}
+body.page-id-145 .elementor-element-widerange-cta-wrap {
+  grid-column: 1 / -1 !important;
+  grid-row: 2 !important;
+  justify-self: center !important;
+  max-width: 780px !important;
+  width: 780px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+@media (max-width: 1620px) {
+  body.page-id-145 .elementor-element-widerange-cta-wrap {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+@media (max-width: 860px) {
+  body.page-id-145 .elementor-element-wmfsh7gq .twbb_cta-wrapper {
+    min-height: 0 !important;
+  }
+}
+body.page-id-145 .elementor-element-wmfsh7gq .auramind-coming-soon-section {
+  grid-column: 1 / -1 !important;
+  grid-row: 3 !important;
+}
+body.page-id-145 .elementor-element-cta-ai-server-rental {
+  grid-column: 1 !important;
+  grid-row: 4 !important;
+}
+body.page-id-145 .elementor-element-cta-security-compliance {
+  grid-column: 2 !important;
+  grid-row: 4 !important;
+}
+
+/* COMING SOON: section with bold, centre-aligned text only */
+body.page-id-145 .elementor-element-wmfsh7gq .auramind-coming-soon-section {
+  min-width: 0 !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 1.5rem 1rem !important;
+}
+body.page-id-145 .elementor-element-wmfsh7gq .auramind-coming-soon-section .auramind-coming-soon-heading {
+  margin: 0 !important;
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #111 !important;
+  text-align: center !important;
+}
+
+/* Services page cards: same level (equal height in each row), no scrolling */
+body.page-id-145 .elementor-element-wmfsh7gq .elementor-element > .elementor-widget-container {
+  display: flex !important;
+  flex: 1 !important;
+  min-height: 0 !important;
+  width: 100% !important;
+}
+body.page-id-145 .elementor-element-wmfsh7gq .twbb_cta-wrapper {
+  flex: 1 !important;
+  min-height: 470px !important;
+  height: 100% !important;
+  align-self: stretch !important;
+  overflow: visible !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 780px !important;
+  box-sizing: border-box !important;
+}
+body.page-id-145 .elementor-element-wmfsh7gq .twbb_cta-content-wrapper {
+  overflow: visible !important;
+  min-height: 0 !important;
 }
 
 .elementor-element-widerange-cta-wrap .elementor-element-widerange-cta {
@@ -2090,26 +2559,20 @@ body .elementor-element-ihtx4g4l .twbb-headline--style-highlight * {
   color: #000 !important;
 }
 
-/* Sub-service hero height (high specificity so it wins over theme/aggregated CSS) */
+/* Sub-service hero height: 2/5 of viewport (40vh), high specificity so it wins over theme/aggregated CSS */
 body .elementor-element-q0cugbsk.twbb_section.twbb_full_h,
 body .elementor-element-wvf7j5xq.twbb_section.twbb_full_h,
 body .elementor-element-ihtx4g4l.twbb_section.twbb_full_h {
-  min-height: 180vh !important;
-  height: 180vh !important;
+  min-height: 40vh !important;
+  height: 40vh !important;
 }
 
 /* Sub-service hero: scoped to section 7f979378 (where the hero lives) so it always wins */
 .elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_section.twbb_full_h,
 .elementor-element-7f979378 .elementor-element-wvf7j5xq.twbb_section.twbb_full_h,
 .elementor-element-7f979378 .elementor-element-ihtx4g4l.twbb_section.twbb_full_h {
-  min-height: 180vh !important;
-  height: 180vh !important;
-}
-
-/* AI Infrastructure page only: reduce hero to half of 180vh */
-body.page-id-149 .elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_section.twbb_full_h {
-  min-height: 35vh !important;
-  height: 35vh !important;
+  min-height: 40vh !important;
+  height: 40vh !important;
 }
 
 /* Payment process step cards: dark grey border (high specificity so it shows) */
@@ -2117,4 +2580,14 @@ body.page-id-149 .elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_se
 body .auramind-payment-process-steps .auramind-payment-step {
   border: 2px solid #374151 !important;
   border-radius: 8px !important;
+}
+
+/* Force hero area: section ::before covers full width (151); hero div stays transparent so gradient shows */
+body.page-id-151 .elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_section.twbb_full_h,
+body.page-id-151.elementor-page .elementor-element-7f979378 .elementor-element-q0cugbsk.twbb_section.twbb_full_h {
+  background-image: none !important;
+  background-color: transparent !important;
+  width: 100% !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
 }
