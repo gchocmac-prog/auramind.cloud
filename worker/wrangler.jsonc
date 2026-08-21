@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "auramind",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-21",
+  "workers_dev": true,
+  "vars": {
+    "ALLOWED_ORIGINS": "https://auramind.cloud,https://www.auramind.cloud",
+    "ALLOWED_HOSTNAMES": "auramind.cloud,www.auramind.cloud",
+    "RESEND_FROM": "Auramind Website <website@notify.auramind.cloud>",
+    "RESEND_TO": "info@auramind.cloud"
+  }
+}
