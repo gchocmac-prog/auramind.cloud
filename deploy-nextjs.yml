@@ -44,6 +44,9 @@ jobs:
         run: npm ci
 
       - name: Build with Next.js
+        env:
+          NEXT_PUBLIC_PROJECT_INQUIRY_ENDPOINT: https://auramind.gchocmac.workers.dev/api/inquiry
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
         run: npm run build
 
       - name: Upload Pages artifact
