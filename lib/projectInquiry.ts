@@ -2,8 +2,8 @@
  * Project inquiry option catalogues and submission contract.
  * Edit option arrays to update form choices without touching form logic.
  *
- * Form delivery integration lives here. Connect Google Sheets, email, or CRM
- * before production launch — see README.
+ * Form delivery integration lives here. The production endpoint is a
+ * Cloudflare Worker that validates Turnstile and relays via Resend.
  */
 
 export const BUDGET_RANGES = [
@@ -82,6 +82,7 @@ export type ProjectInquiryPayload = {
   timeline: string;
   additionalRequirements: string;
   submittedAt: string;
+  turnstileToken: string;
 };
 
 /**
@@ -93,8 +94,14 @@ export const PROJECT_INQUIRY_ENDPOINT = (
   process.env.NEXT_PUBLIC_PROJECT_INQUIRY_ENDPOINT ?? ""
 ).trim();
 
-/** True when a real delivery endpoint is configured. */
-export const isProjectInquiryConfigured = PROJECT_INQUIRY_ENDPOINT.length > 0;
+/** Public Cloudflare Turnstile site key. Safe to expose in browser code. */
+export const TURNSTILE_SITE_KEY = (
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? ""
+).trim();
+
+/** True when both delivery and anti-abuse controls are configured. */
+export const isProjectInquiryConfigured =
+  PROJECT_INQUIRY_ENDPOINT.length > 0 && TURNSTILE_SITE_KEY.length > 0;
 
 /**
  * Submit a validated project enquiry.
