@@ -1037,6 +1037,11 @@ body {
     transform 0.2s ease;
 }
 
+.inquiry-turnstile {
+  min-height: 65px;
+  overflow-x: auto;
+}
+
 .inquiry-submit:hover:not(:disabled) {
   background: #f5dc4a;
   box-shadow:
