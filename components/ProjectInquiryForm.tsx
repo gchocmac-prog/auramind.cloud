@@ -1,22 +1,48 @@
 "use client";
 
 import {
+  useEffect,
   useId,
+  useRef,
   useState,
   type FormEvent,
   type ReactNode,
 } from "react";
+import Script from "next/script";
 import {
   AI_INFRASTRUCTURE_OPTIONS,
   BUDGET_RANGES,
   PATHWAYS,
   REGIONAL_RESOURCE_OPTIONS,
   TIMELINES,
+  TURNSTILE_SITE_KEY,
   isProjectInquiryConfigured,
   submitProjectInquiry,
   type PathwayId,
   type ProjectInquiryPayload,
 } from "@/lib/projectInquiry";
+
+type TurnstileApi = {
+  render: (
+    container: HTMLElement,
+    options: {
+      sitekey: string;
+      action: "project-inquiry";
+      theme: "auto";
+      callback: (token: string) => void;
+      "expired-callback": () => void;
+      "error-callback": () => void;
+    },
+  ) => string;
+  reset: (widgetId: string) => void;
+  remove: (widgetId: string) => void;
+};
+
+declare global {
+  interface Window {
+    turnstile?: TurnstileApi;
+  }
+}
 
 type FormState = {
   name: string;
@@ -111,6 +137,60 @@ function Field({
   );
 }
 
+function TurnstileWidget({
+  siteKey,
+  onTokenChange,
+  resetKey,
+}: {
+  siteKey: string;
+  onTokenChange: (token: string) => void;
+  resetKey: number;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+  const [apiReady, setApiReady] = useState(false);
+
+  useEffect(() => {
+    const turnstile = window.turnstile;
+    const container = containerRef.current;
+    if (!apiReady || !turnstile || !container || !siteKey) return;
+
+    widgetIdRef.current = turnstile.render(container, {
+      sitekey: siteKey,
+      action: "project-inquiry",
+      theme: "auto",
+      callback: onTokenChange,
+      "expired-callback": () => onTokenChange(""),
+      "error-callback": () => onTokenChange(""),
+    });
+
+    return () => {
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.remove(widgetIdRef.current);
+      }
+      widgetIdRef.current = null;
+    };
+  }, [apiReady, onTokenChange, siteKey]);
+
+  useEffect(() => {
+    if (widgetIdRef.current && window.turnstile) {
+      window.turnstile.reset(widgetIdRef.current);
+      onTokenChange("");
+    }
+  }, [onTokenChange, resetKey]);
+
+  return (
+    <>
+      <Script
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        strategy="afterInteractive"
+        onReady={() => setApiReady(true)}
+      />
+      <div ref={containerRef} className="inquiry-turnstile" />
+    </>
+  );
+}
+
 export function ProjectInquiryForm() {
   const formId = useId();
   const [values, setValues] = useState<FormState>(INITIAL);
@@ -118,6 +198,8 @@ export function ProjectInquiryForm() {
   const [submitted, setSubmitted] = useState(false);
   const [pending, setPending] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileResetKey, setTurnstileResetKey] = useState(0);
 
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setValues((prev) => ({ ...prev, [key]: value }));
@@ -153,6 +235,8 @@ export function ProjectInquiryForm() {
     setValues(INITIAL);
     setErrors({});
     setSubmitError(null);
+    setTurnstileToken("");
+    setTurnstileResetKey((value) => value + 1);
     setSubmitted(false);
   };
 
@@ -166,6 +250,10 @@ export function ProjectInquiryForm() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
     if (!values.pathway) return;
+    if (!turnstileToken) {
+      setSubmitError("Complete the security check before submitting.");
+      return;
+    }
 
     const payload: ProjectInquiryPayload = {
       name: values.name.trim(),
@@ -179,6 +267,7 @@ export function ProjectInquiryForm() {
       timeline: values.timeline,
       additionalRequirements: values.additionalRequirements.trim(),
       submittedAt: new Date().toISOString(),
+      turnstileToken,
     };
 
     setPending(true);
@@ -186,6 +275,8 @@ export function ProjectInquiryForm() {
       await submitProjectInquiry(payload);
       setSubmitted(true);
     } catch {
+      setTurnstileToken("");
+      setTurnstileResetKey((value) => value + 1);
       setSubmitError(
         "Something went wrong while sending your enquiry. Please try again.",
       );
@@ -464,10 +555,18 @@ export function ProjectInquiryForm() {
         </p>
       ) : null}
 
+      {isProjectInquiryConfigured ? (
+        <TurnstileWidget
+          siteKey={TURNSTILE_SITE_KEY}
+          onTokenChange={setTurnstileToken}
+          resetKey={turnstileResetKey}
+        />
+      ) : null}
+
       <button
         type="submit"
         className="inquiry-submit"
-        disabled={!isProjectInquiryConfigured || pending}
+        disabled={!isProjectInquiryConfigured || !turnstileToken || pending}
       >
         {pending ? "Sending…" : "Submit Project Enquiry"}
       </button>
