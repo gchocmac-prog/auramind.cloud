@@ -76,8 +76,8 @@ export function Process() {
               descriptionClassName="process-heading__desc"
               title={
                 <>
-                  <span className="block title-rim">Assess, Design,</span>
-                  <span className="block title-rim">Deliver, Operate.</span>
+                  <span className="block title-rim">Business</span>
+                  <span className="block title-rim">Philosophy</span>
                 </>
               }
               description="A connected delivery path—from early clarity to ongoing operations."
