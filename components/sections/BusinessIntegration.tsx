@@ -47,8 +47,8 @@ export function BusinessIntegration() {
         </Reveal>
 
         <div className="pathway-grid mt-10">
-          <Reveal delay={1}>
-            <article className="pathway-card pathway-card--primary relative flex flex-col overflow-hidden rounded-[2rem] bg-auramind-black px-7 py-9 text-auramind-white sm:px-9 sm:py-10">
+          <Reveal delay={1} className="h-full">
+            <article className="pathway-card pathway-card--primary relative flex h-full flex-col overflow-hidden rounded-[2rem] bg-auramind-black px-7 py-9 text-auramind-white sm:px-9 sm:py-10">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full border-[14px] border-white/15"
@@ -72,8 +72,11 @@ export function BusinessIntegration() {
               <p className="relative z-10 mt-2 text-sm font-medium text-white/80">
                 For teams that want decisions validated by data, not guesswork.
               </p>
+              <p className="relative z-10 mt-3 text-sm leading-relaxed text-auramind-silver sm:text-base">
+                Market and customer insight that turns evidence into action.
+              </p>
 
-              <ul className="relative z-10 space-y-3.5 border-t border-white/15 pt-8">
+              <ul className="relative z-10 mt-auto space-y-3.5 border-t border-white/15 pt-8">
                 {researchItems.map((item) => (
                   <li
                     key={item}
@@ -90,8 +93,8 @@ export function BusinessIntegration() {
             </article>
           </Reveal>
 
-          <Reveal delay={2}>
-            <article className="pathway-card pathway-card--secondary relative flex flex-col overflow-hidden rounded-[2rem] border border-auramind-black/12 bg-auramind-elevated px-7 py-9 sm:px-9 sm:py-10">
+          <Reveal delay={2} className="h-full">
+            <article className="pathway-card pathway-card--secondary relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-auramind-black/12 bg-auramind-elevated px-7 py-9 sm:px-9 sm:py-10">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -left-10 bottom-0 h-48 w-48 rounded-full border-[12px] border-auramind-black/10"
@@ -115,8 +118,11 @@ export function BusinessIntegration() {
               <p className="relative z-10 mt-2 text-sm font-medium text-auramind-black/75">
                 For businesses that need a digital presence that performs.
               </p>
+              <p className="relative z-10 mt-3 text-sm leading-relaxed text-auramind-black/65 sm:text-base">
+                An AI-enabled website that converts, performs and stays compliant.
+              </p>
 
-              <ul className="relative z-10 space-y-3.5 border-t border-auramind-black/12 pt-8">
+              <ul className="relative z-10 mt-auto space-y-3.5 border-t border-auramind-black/12 pt-8">
                 {websiteItems.map((item) => (
                   <li
                     key={item}
