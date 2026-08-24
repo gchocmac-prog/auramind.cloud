@@ -4,7 +4,7 @@ import { ProcessPath } from "@/components/ProcessPath";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 
-const steps = [
+const infrastructureSteps = [
   {
     name: "Assess",
     description:
@@ -28,6 +28,33 @@ const steps = [
     description:
       "Sustain operations, handover, support and continuity into long-term use.",
     output: "Operational continuity & support",
+  },
+];
+
+const marketingSteps = [
+  {
+    name: "Assess",
+    description:
+      "Clarify business goals, digital baseline and the research questions to answer.",
+    output: "Requirements & research brief",
+  },
+  {
+    name: "Design",
+    description:
+      "Define website scope, KPIs, architecture and the research design.",
+    output: "Delivery strategy & structure",
+  },
+  {
+    name: "Deliver",
+    description:
+      "Build the website and AI features while research collection and analysis run in parallel.",
+    output: "Live website & validated insight",
+  },
+  {
+    name: "Optimize",
+    description:
+      "Measure, validate and iterate so the site and strategy keep improving.",
+    output: "Performance dashboard & roadmap",
   },
 ];
 
@@ -58,11 +85,27 @@ export function Process() {
           </div>
         </Reveal>
 
-        <Reveal delay={1}>
-          <div className="process-section__body">
-            <ProcessPath steps={steps} />
-          </div>
-        </Reveal>
+        <div className="process-section__body">
+          <Reveal delay={1}>
+            <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.18em] text-auramind-black/55">
+              AI Infrastructure
+            </p>
+            <div className="process-section__body">
+              <ProcessPath steps={infrastructureSteps} />
+            </div>
+          </Reveal>
+        </div>
+
+        <div className="mt-12 sm:mt-14 lg:mt-16">
+          <Reveal delay={1}>
+            <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.18em] text-auramind-black/55">
+              Marketing & Integration
+            </p>
+            <div className="process-section__body">
+              <ProcessPath steps={marketingSteps} />
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
