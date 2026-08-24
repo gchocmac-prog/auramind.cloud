@@ -39,7 +39,7 @@ const SEA_COUNTRY_NAMES = new Set([
   "Timor-Leste",
 ]);
 
-const SEA_POINT_OF_VIEW = { lat: 4.2, lng: 113.5, altitude: 2.5 };
+const SEA_POINT_OF_VIEW = { lat: 4.2, lng: 113.5, altitude: 2.8 };
 
 const MALAYSIA_ORIGIN = { lat: 3.14, lng: 101.69, name: "Malaysia" };
 
