@@ -1,51 +1,21 @@
-"use client";
-
-import { ProcessPath } from "@/components/ProcessPath";
 import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 
 const researchItems = [
-  "Market, competitor and positioning analysis",
-  "Customer segmentation and opportunity mapping",
-  "Sentiment and topic analysis across reviews, social and feedback",
-  "Pricing, packaging and channel validation",
-  "Actionable roadmap that links every insight to a concrete change",
+  "Market and competitor analysis",
+  "Customer segmentation",
+  "Sentiment and topic analysis",
+  "Pricing and channel validation",
+  "Actionable roadmap from insight",
 ];
 
 const websiteItems = [
-  "Conversion-focused UX/UI, information architecture and responsive design",
-  "AI-powered customer assistant — 7×24 enquiries, guidance and lead capture",
-  "Intelligent search and personalised content for each visitor",
-  "SEO, analytics and Core Web Vitals performance tuning",
-  "PDPA-compliant data handling, privacy and consent flows",
-  "Managed deployment, monitoring and ongoing optimisation",
-];
-
-const steps = [
-  {
-    name: "Assess",
-    description:
-      "Clarify business goals, digital baseline and the research questions to answer.",
-    output: "Requirements & research brief",
-  },
-  {
-    name: "Design",
-    description:
-      "Define website scope, KPIs, architecture and the research design.",
-    output: "Delivery strategy & structure",
-  },
-  {
-    name: "Deliver",
-    description:
-      "Build the website and AI features while research collection and analysis run in parallel.",
-    output: "Live website & validated insight",
-  },
-  {
-    name: "Optimize",
-    description:
-      "Measure, validate and iterate so the site and strategy keep improving.",
-    output: "Performance dashboard & roadmap",
-  },
+  "Conversion-focused UX/UI and responsive design",
+  "AI customer assistant — 7×24 enquiries and lead capture",
+  "Intelligent search and personalised content",
+  "SEO, analytics and Core Web Vitals performance",
+  "PDPA-compliant data handling and consent",
+  "Managed deployment and ongoing optimisation",
 ];
 
 export function BusinessIntegration() {
@@ -77,8 +47,8 @@ export function BusinessIntegration() {
         </Reveal>
 
         <div className="pathway-grid mt-10">
-          <Reveal delay={1} className="h-full">
-            <article className="pathway-card pathway-card--primary relative flex h-full flex-col overflow-hidden rounded-[2rem] bg-auramind-black px-7 py-9 text-auramind-white sm:px-9 sm:py-10">
+          <Reveal delay={1}>
+            <article className="pathway-card pathway-card--primary relative flex flex-col overflow-hidden rounded-[2rem] bg-auramind-black px-7 py-9 text-auramind-white sm:px-9 sm:py-10">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full border-[14px] border-white/15"
@@ -88,7 +58,7 @@ export function BusinessIntegration() {
                 className="pointer-events-none absolute bottom-10 right-8 h-16 w-16 rounded-full border-[6px] border-auramind-yellow"
               />
 
-              <div className="relative z-10 flex flex-wrap items-center gap-2.5">
+              <div className="relative z-10 flex flex-wrap items-center gap-2">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-auramind-silver">
                   Business 01
                 </p>
@@ -102,11 +72,8 @@ export function BusinessIntegration() {
               <p className="relative z-10 mt-2 text-sm font-medium text-white/80">
                 For teams that want decisions validated by data, not guesswork.
               </p>
-              <p className="relative z-10 mt-3 text-sm leading-relaxed text-auramind-silver sm:text-base">
-                Market and customer insight that turns evidence into action.
-              </p>
 
-              <ul className="relative z-10 mt-auto space-y-3.5 border-t border-white/15 pt-8">
+              <ul className="relative z-10 space-y-3.5 border-t border-white/15 pt-8">
                 {researchItems.map((item) => (
                   <li
                     key={item}
@@ -123,8 +90,8 @@ export function BusinessIntegration() {
             </article>
           </Reveal>
 
-          <Reveal delay={2} className="h-full">
-            <article className="pathway-card pathway-card--secondary relative flex h-full flex-col overflow-hidden rounded-[2rem] border border-auramind-black/12 bg-auramind-elevated px-7 py-9 sm:px-9 sm:py-10">
+          <Reveal delay={2}>
+            <article className="pathway-card pathway-card--secondary relative flex flex-col overflow-hidden rounded-[2rem] border border-auramind-black/12 bg-auramind-elevated px-7 py-9 sm:px-9 sm:py-10">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute -left-10 bottom-0 h-48 w-48 rounded-full border-[12px] border-auramind-black/10"
@@ -134,7 +101,7 @@ export function BusinessIntegration() {
                 className="pointer-events-none absolute right-8 top-10 h-20 w-20 rounded-full border-[8px] border-auramind-silver"
               />
 
-              <div className="relative z-10 flex flex-wrap items-center gap-2.5">
+              <div className="relative z-10 flex flex-wrap items-center gap-2">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-auramind-black/50">
                   Business 02
                 </p>
@@ -148,11 +115,8 @@ export function BusinessIntegration() {
               <p className="relative z-10 mt-2 text-sm font-medium text-auramind-black/75">
                 For businesses that need a digital presence that performs.
               </p>
-              <p className="relative z-10 mt-3 text-sm leading-relaxed text-auramind-black/65 sm:text-base">
-                An AI-enabled website that converts, performs and stays compliant.
-              </p>
 
-              <ul className="relative z-10 mt-auto space-y-3.5 border-t border-auramind-black/12 pt-8">
+              <ul className="relative z-10 space-y-3.5 border-t border-auramind-black/12 pt-8">
                 {websiteItems.map((item) => (
                   <li
                     key={item}
@@ -167,32 +131,6 @@ export function BusinessIntegration() {
                 ))}
               </ul>
             </article>
-          </Reveal>
-        </div>
-
-        <div className="mt-14 sm:mt-16 lg:mt-20">
-          <Reveal>
-            <div className="process-heading">
-              <SectionHeading
-                id="business-how-it-works-heading"
-                align="center"
-                eyebrow="How It Works"
-                titleClassName="process-heading__title"
-                descriptionClassName="process-heading__desc"
-                title={
-                  <>
-                    <span className="block title-rim">Assess, Design,</span>
-                    <span className="block title-rim">Deliver, Optimize.</span>
-                  </>
-                }
-                description="A connected path from clarity to measurable outcomes."
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={1}>
-            <div className="process-section__body">
-              <ProcessPath steps={steps} />
-            </div>
           </Reveal>
         </div>
       </div>
