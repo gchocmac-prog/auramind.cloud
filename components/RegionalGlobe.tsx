@@ -39,7 +39,7 @@ const SEA_COUNTRY_NAMES = new Set([
   "Timor-Leste",
 ]);
 
-const SEA_POINT_OF_VIEW = { lat: 4.2, lng: 113.5, altitude: 2.8 };
+const SEA_POINT_OF_VIEW = { lat: 4.2, lng: 113.5, altitude: 1.72 };
 
 const MALAYSIA_ORIGIN = { lat: 3.14, lng: 101.69, name: "Malaysia" };
 
@@ -104,6 +104,8 @@ export function RegionalGlobe() {
   const [reduceMotion, setReduceMotion] = useState(false);
   const [isCompact, setIsCompact] = useState(false);
   const [ready, setReady] = useState(false);
+  /** Bumped to force a fresh WebGL context after a context loss. */
+  const [globeKey, setGlobeKey] = useState(0);
 
   const globeMaterial = useMemo(
     () =>
@@ -286,10 +288,6 @@ export function RegionalGlobe() {
     [],
   );
 
-  /**
-   * onGlobeReady may fire during the library's init path (before this
-   * component has finished mounting). Only mark a ref here — never setState.
-   */
   const onGlobeReady = useCallback(() => {
     globeEngineReadyRef.current = true;
   }, []);
@@ -316,7 +314,7 @@ export function RegionalGlobe() {
       active = false;
       cancelAnimationFrame(frameId);
     };
-  }, []);
+  }, [globeKey]);
 
   useEffect(() => {
     const globe = globeRef.current;
@@ -332,9 +330,21 @@ export function RegionalGlobe() {
     controls.addEventListener("start", onStart);
     controls.addEventListener("end", onEnd);
 
+    const canvas = globe.renderer().domElement;
+    const onContextLost = (event: Event) => {
+      // Allow the browser to recover the context; remount to restore it.
+      event.preventDefault();
+      globeEngineReadyRef.current = false;
+      didSetViewRef.current = false;
+      setReady(false);
+      setGlobeKey((value) => value + 1);
+    };
+    canvas.addEventListener("webglcontextlost", onContextLost, false);
+
     return () => {
       controls.removeEventListener("start", onStart);
       controls.removeEventListener("end", onEnd);
+      canvas.removeEventListener("webglcontextlost", onContextLost, false);
       controls.autoRotate = false;
     };
   }, [
@@ -377,6 +387,7 @@ export function RegionalGlobe() {
           <div className="absolute inset-0 animate-pulse rounded-full bg-[#1c1c1e]/85" />
         )}
         <Globe
+          key={globeKey}
           ref={globeRef}
           width={dimensions.width}
           height={dimensions.height}
