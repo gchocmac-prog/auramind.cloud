@@ -106,6 +106,8 @@ export function RegionalGlobe() {
   const [ready, setReady] = useState(false);
   /** Bumped to force a fresh WebGL context after a context loss. */
   const [globeKey, setGlobeKey] = useState(0);
+  /** False when the browser cannot provide WebGL — render a static fallback. */
+  const [webglSupported, setWebglSupported] = useState(true);
 
   const globeMaterial = useMemo(
     () =>
@@ -138,6 +140,19 @@ export function RegionalGlobe() {
     () => (isCompact ? CONNECTION_ARCS.slice(0, 2) : CONNECTION_ARCS),
     [isCompact],
   );
+
+  useEffect(() => {
+    try {
+      const canvas = document.createElement("canvas");
+      const gl =
+        canvas.getContext("webgl2") ||
+        canvas.getContext("webgl") ||
+        canvas.getContext("experimental-webgl");
+      setWebglSupported(Boolean(gl));
+    } catch {
+      setWebglSupported(false);
+    }
+  }, []);
 
   useEffect(() => {
     reduceMotionRef.current = reduceMotion;
@@ -265,7 +280,9 @@ export function RegionalGlobe() {
   const applyRendererQuality = useCallback(
     (globe: GlobeMethods, width: number, height: number) => {
       const renderer = globe.renderer();
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Cap device pixel ratio lower: the globe is decorative, and DPR² drives
+      // framebuffer memory — the biggest driver of GPU pressure/crashes.
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       renderer.setPixelRatio(dpr);
       renderer.setSize(width, height, false);
       renderer.sortObjects = true;
@@ -320,9 +337,15 @@ export function RegionalGlobe() {
     const globe = globeRef.current;
     if (!globe || !ready) return;
 
-    applyRendererQuality(globe, dimensions.width, dimensions.height);
-    configureControls(globe, !didSetViewRef.current);
-    didSetViewRef.current = true;
+    try {
+      applyRendererQuality(globe, dimensions.width, dimensions.height);
+      configureControls(globe, !didSetViewRef.current);
+      didSetViewRef.current = true;
+    } catch (error) {
+      console.error("Failed to initialise the regional globe", error);
+      setReady(false);
+      return;
+    }
 
     const controls = globe.controls();
     const onStart = () => pauseAutoRotate();
@@ -383,75 +406,84 @@ export function RegionalGlobe() {
       />
 
       <div className="regional-globe__stage relative h-full w-full overflow-hidden rounded-full">
-        {!ready && (
-          <div className="absolute inset-0 animate-pulse rounded-full bg-[#1c1c1e]/85" />
+        {!webglSupported ? (
+          <div
+            className="absolute inset-0 rounded-full bg-[#1c1c1e]/85"
+            aria-hidden="true"
+          />
+        ) : (
+          <>
+            {!ready && (
+              <div className="absolute inset-0 animate-pulse rounded-full bg-[#1c1c1e]/85" />
+            )}
+            <Globe
+              key={globeKey}
+              ref={globeRef}
+              width={dimensions.width}
+              height={dimensions.height}
+              backgroundColor="rgba(0,0,0,0)"
+              animateIn={false}
+              showGlobe
+              showGraticules
+              showAtmosphere
+              atmosphereColor="#d8dbe0"
+              atmosphereAltitude={0.1}
+              globeMaterial={globeMaterial}
+              globeCurvatureResolution={1.6}
+              polygonsData={countries}
+              polygonGeoJsonGeometry="geometry"
+              polygonCapColor={(d) => {
+                const feature = d as CountryFeature;
+                if (isMalaysia(feature)) return "#ffe566";
+                if (isSoutheastAsia(feature)) return "#f8e46a";
+                return "rgba(72, 74, 78, 0.88)";
+              }}
+              polygonSideColor={(d) => {
+                const feature = d as CountryFeature;
+                if (isMalaysia(feature)) return "rgba(255, 229, 102, 0.4)";
+                if (isSoutheastAsia(feature)) return "rgba(248, 228, 106, 0.26)";
+                return "rgba(24, 24, 26, 0.9)";
+              }}
+              polygonStrokeColor={() => "rgba(196, 199, 205, 0.78)"}
+              polygonAltitude={(d) => {
+                const feature = d as CountryFeature;
+                if (isMalaysia(feature)) return 0.02;
+                if (isSoutheastAsia(feature)) return 0.012;
+                return 0.0035;
+              }}
+              polygonCapCurvatureResolution={1.6}
+              polygonsTransitionDuration={0}
+              pointsData={pointsData}
+              pointLat="lat"
+              pointLng="lng"
+              pointLabel={() => ""}
+              pointColor={(d) =>
+                (d as { kind?: string }).kind === "origin"
+                  ? "#fff3a0"
+                  : "rgba(248, 228, 106, 0.85)"
+              }
+              pointAltitude={(d) =>
+                (d as { kind?: string }).kind === "origin" ? 0.03 : 0.014
+              }
+              pointRadius={(d) =>
+                (d as { kind?: string }).kind === "origin" ? 0.55 : 0.28
+              }
+              pointsMerge={false}
+              arcsData={arcsData}
+              arcColor={() => ["rgba(248,228,106,0.55)", "rgba(174,177,184,0.15)"]}
+              arcAltitude={0.12}
+              arcStroke={0.35}
+              arcDashLength={0.55}
+              arcDashGap={0.35}
+              arcDashAnimateTime={reduceMotion ? 0 : 4200}
+              onGlobeReady={onGlobeReady}
+              onGlobeClick={() => {
+                pauseAutoRotate();
+                scheduleAutoRotate();
+              }}
+            />
+          </>
         )}
-        <Globe
-          key={globeKey}
-          ref={globeRef}
-          width={dimensions.width}
-          height={dimensions.height}
-          backgroundColor="rgba(0,0,0,0)"
-          animateIn={!reduceMotion}
-          showGlobe
-          showGraticules
-          showAtmosphere
-          atmosphereColor="#d8dbe0"
-          atmosphereAltitude={0.1}
-          globeMaterial={globeMaterial}
-          globeCurvatureResolution={2.2}
-          polygonsData={countries}
-          polygonGeoJsonGeometry="geometry"
-          polygonCapColor={(d) => {
-            const feature = d as CountryFeature;
-            if (isMalaysia(feature)) return "#ffe566";
-            if (isSoutheastAsia(feature)) return "#f8e46a";
-            return "rgba(72, 74, 78, 0.88)";
-          }}
-          polygonSideColor={(d) => {
-            const feature = d as CountryFeature;
-            if (isMalaysia(feature)) return "rgba(255, 229, 102, 0.4)";
-            if (isSoutheastAsia(feature)) return "rgba(248, 228, 106, 0.26)";
-            return "rgba(24, 24, 26, 0.9)";
-          }}
-          polygonStrokeColor={() => "rgba(196, 199, 205, 0.78)"}
-          polygonAltitude={(d) => {
-            const feature = d as CountryFeature;
-            if (isMalaysia(feature)) return 0.02;
-            if (isSoutheastAsia(feature)) return 0.012;
-            return 0.0035;
-          }}
-          polygonCapCurvatureResolution={2.2}
-          polygonsTransitionDuration={reduceMotion ? 0 : 500}
-          pointsData={pointsData}
-          pointLat="lat"
-          pointLng="lng"
-          pointLabel={() => ""}
-          pointColor={(d) =>
-            (d as { kind?: string }).kind === "origin"
-              ? "#fff3a0"
-              : "rgba(248, 228, 106, 0.85)"
-          }
-          pointAltitude={(d) =>
-            (d as { kind?: string }).kind === "origin" ? 0.03 : 0.014
-          }
-          pointRadius={(d) =>
-            (d as { kind?: string }).kind === "origin" ? 0.55 : 0.28
-          }
-          pointsMerge={false}
-          arcsData={arcsData}
-          arcColor={() => ["rgba(248,228,106,0.55)", "rgba(174,177,184,0.15)"]}
-          arcAltitude={0.12}
-          arcStroke={0.35}
-          arcDashLength={0.55}
-          arcDashGap={0.35}
-          arcDashAnimateTime={reduceMotion ? 0 : 4200}
-          onGlobeReady={onGlobeReady}
-          onGlobeClick={() => {
-            pauseAutoRotate();
-            scheduleAutoRotate();
-          }}
-        />
       </div>
     </div>
   );
