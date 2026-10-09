@@ -112,12 +112,15 @@ async function main() {
 
   if (home && home.status === 200) {
     const html = home.body;
+    // ITAD is positioned as product resale, so the card reads "ITAD Product
+    // Resale". Keep this in sync with Services.tsx if the wording changes.
+    const itadLive = /Pathway\s*03/i.test(html) && /ITAD Product Resale/i.test(html);
     record(
-      "ITAD pathway is live (Pathway 03)",
-      /Pathway\s*03/i.test(html) && /IT Assets Disposition/i.test(html),
-      /IT Assets Disposition/i.test(html)
-        ? "found 'IT Assets Disposition'"
-        : "missing 'IT Assets Disposition' — front end not deployed?",
+      "ITAD pathway is live (Pathway 03, product resale)",
+      itadLive,
+      itadLive
+        ? "found 'ITAD Product Resale'"
+        : "missing 'ITAD Product Resale' — front end not deployed, or the card wording changed",
     );
     record(
       "Pathway 04 (AI Website) is live",
