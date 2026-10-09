@@ -58,19 +58,21 @@ Auramind is execution-led, vendor-neutral and regionally connected.
 
 \- Early opportunity structuring
 
-3\. IT Assets Disposition (ITAD)
+3\. ITAD Product Resale
 
-\- Asset inventory and audit
+We resell established ITAD products. We are a reseller, not the operator of the underlying service.
 
-\- Certified data sanitisation
+\- ITAD product selection and licensing
 
-\- Refurbishment and remarketing
+\- Certified data erasure software
 
-\- Compliant recycling and disposal
+\- Asset disposition and audit platforms
 
 \- Certificates and audit trail
 
-\- Chain-of-custody coordination
+\- Procurement and supply coordination
+
+\- Local delivery and support
 
 
 
