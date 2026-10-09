@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 
+// Root-relative so these also work from other routes (e.g. /privacy). A bare
+// "#services" only scrolls within the current page, so on /privacy it did
+// nothing. "/#services" is still a same-page jump when already on "/".
 const footerLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#how-we-work", label: "How We Work" },
-  { href: "#about", label: "About" },
-  { href: "#project-inquiry", label: "Contact" },
+  { href: "/#services", label: "Services" },
+  { href: "/#how-we-work", label: "How We Work" },
+  { href: "/#about", label: "About" },
+  { href: "/#project-inquiry", label: "Contact" },
 ];
 
 const legalLinks = [{ href: "/privacy", label: "Privacy Notice" }];
@@ -15,7 +18,7 @@ export function Footer() {
     <footer className="border-t border-auramind-black/10 bg-auramind-secondary">
       <div className="mx-auto flex w-full max-w-[var(--container)] flex-col gap-10 px-5 py-12 sm:px-8 lg:flex-row lg:items-start lg:justify-between lg:px-10 lg:py-14">
         <div className="max-w-sm">
-          <Link href="#top" className="inline-flex items-center gap-2.5">
+          <Link href="/#top" className="inline-flex items-center gap-2.5">
             <Logo variant="black" size={32} />
             <span className="text-sm font-semibold tracking-[0.04em]">
               Auramind
