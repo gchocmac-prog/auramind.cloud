@@ -183,10 +183,10 @@ export function Hero({
                 resources and project partners.
               </p>
               <div className="hero-enter hero-enter--cta mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3.5">
-                <Button href="#project-inquiry" variant="light">
+                <Button href="/#project-inquiry" variant="light">
                   Discuss a Project
                 </Button>
-                <Button href="#services" variant="outline-light">
+                <Button href="/#services" variant="outline-light">
                   Explore Services
                 </Button>
               </div>
