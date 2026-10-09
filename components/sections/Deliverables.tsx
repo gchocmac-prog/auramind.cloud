@@ -23,8 +23,8 @@ const deliverables = [
     copy: "Early structuring materials for regional sites, resources and project options.",
   },
   {
-    title: "Disposition record",
-    copy: "Asset-level documentation covering inventory, sanitisation and final disposal.",
+    title: "ITAD supply record",
+    copy: "Product, licensing and support documentation for the ITAD products supplied.",
   },
 ];
 

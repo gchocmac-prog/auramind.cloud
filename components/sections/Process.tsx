@@ -31,30 +31,34 @@ const infrastructureSteps = [
   },
 ];
 
+// ITAD is resold, not operated: this tracks our reseller workflow (advise,
+// supply, enable, support) rather than an asset-handling operation. We do not
+// run the erasure, refurbishment or recycling steps ourselves - the products
+// we supply do that.
 const itadSteps = [
   {
-    name: "Inventory",
+    name: "Advise",
     description:
-      "Record every asset, owner, location and data-bearing component against a documented baseline.",
-    output: "Asset register & chain-of-custody record",
+      "Scope your retirement requirements and recommend which ITAD products fit your assets and reporting obligations.",
+    output: "Product recommendation & scope",
   },
   {
-    name: "Sanitise",
+    name: "Supply",
     description:
-      "Erase or destroy data on every data-bearing medium through a supervised, documented process.",
-    output: "Data sanitisation record",
+      "Coordinate licensing and procurement so the right ITAD products reach you through a documented channel.",
+    output: "Licensing & supply record",
   },
   {
-    name: "Recover",
+    name: "Enable",
     description:
-      "Test, refurbish and remarket serviceable assets to recover residual value where a market exists.",
-    output: "Value-recovery report",
+      "Support product setup and rollout to your teams, with standard operating procedure guidance.",
+    output: "Rollout & usage guidance",
   },
   {
-    name: "Certify",
+    name: "Support",
     description:
-      "Route non-recoverable equipment to compliant recycling and close the file with documentation.",
-    output: "Certificate & disposal documentation",
+      "Provide ongoing local support, renewal coordination and escalation to the vendor when needed.",
+    output: "Support & renewal record",
   },
 ];
 
@@ -124,7 +128,7 @@ export function Process() {
         <div className="mt-12 sm:mt-14 lg:mt-16">
           <Reveal delay={1}>
             <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.18em] text-auramind-black/55">
-              IT Assets Disposition
+              ITAD Product Resale
             </p>
             <div className="process-section__body">
               <ProcessPath steps={itadSteps} />
