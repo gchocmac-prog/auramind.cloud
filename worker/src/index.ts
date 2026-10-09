@@ -81,12 +81,12 @@ const REGIONAL_OPTIONS = new Set([
   "Early opportunity structuring",
 ]);
 const ITAD_OPTIONS = new Set([
-  "Asset inventory and audit",
-  "Certified data sanitisation",
-  "Refurbishment and remarketing",
-  "Compliant recycling and disposal",
+  "ITAD product selection and licensing",
+  "Certified data erasure software",
+  "Asset disposition and audit platforms",
   "Certificates and audit trail",
-  "Chain-of-custody coordination",
+  "Procurement and supply coordination",
+  "Local delivery and support",
 ]);
 const DIGITAL_WEBSITE_OPTIONS = new Set([
   "UX/UI and responsive design",
@@ -308,7 +308,7 @@ function label(value: string): string {
   const labels: Record<string, string> = {
     "ai-infrastructure": "AI Infrastructure Delivery",
     "regional-resource": "Regional Resource Integration",
-    itad: "IT Assets Disposition (ITAD)",
+    itad: "ITAD Product Resale",
     "digital-website": "AI Website Design & Development",
     "partnership-other": "Partnership / Other",
     "below-250k": "Below RM250k",
