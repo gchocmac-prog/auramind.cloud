@@ -6,7 +6,6 @@ import { FinalCta } from "@/components/sections/FinalCta";
 import { Process } from "@/components/sections/Process";
 import { Regional } from "@/components/sections/Regional";
 import { Services } from "@/components/sections/Services";
-import { BusinessIntegration } from "@/components/sections/BusinessIntegration";
 
 export default function Home() {
   return (
@@ -15,7 +14,6 @@ export default function Home() {
       <main className="flex-1">
         <HeroZoomSequence next={<Regional />} />
         <Services />
-        <BusinessIntegration />
         <Process />
         <Deliverables />
         <FinalCta />
