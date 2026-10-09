@@ -12,13 +12,21 @@ type InquiryPayload = {
   company: string;
   email: string;
   budgetRange: string;
-  pathway: "ai-infrastructure" | "regional-resource" | "partnership-other";
+  pathway:
+    | "ai-infrastructure"
+    | "regional-resource"
+    | "itad"
+    | "digital-website"
+    | "partnership-other";
   pathwayOptions: string[];
   partnershipDetail: string;
   projectBrief: string;
   timeline: string;
   additionalRequirements: string;
   submittedAt: string;
+  consentGiven: boolean;
+  consentVersion: string;
+  consentAt: string;
   turnstileToken: string;
 };
 
@@ -38,6 +46,8 @@ const RESEND_EMAIL_URL = "https://api.resend.com/emails";
 const PATHWAYS = new Set([
   "ai-infrastructure",
   "regional-resource",
+  "itad",
+  "digital-website",
   "partnership-other",
 ]);
 const BUDGET_RANGES = new Set([
@@ -70,6 +80,30 @@ const REGIONAL_OPTIONS = new Set([
   "Stakeholder coordination",
   "Early opportunity structuring",
 ]);
+const ITAD_OPTIONS = new Set([
+  "Asset inventory and audit",
+  "Certified data sanitisation",
+  "Refurbishment and remarketing",
+  "Compliant recycling and disposal",
+  "Certificates and audit trail",
+  "Chain-of-custody coordination",
+]);
+const DIGITAL_WEBSITE_OPTIONS = new Set([
+  "UX/UI and responsive design",
+  "AI customer assistant",
+  "Intelligent search",
+  "SEO, analytics and Core Web Vitals",
+  "PDPA-aligned data handling",
+  "Managed deployment and optimisation",
+]);
+/** Mirrors PATHWAY_OPTIONS in lib/projectInquiry.ts; keep both in sync. */
+const PATHWAY_OPTIONS: Record<string, Set<string>> = {
+  "ai-infrastructure": AI_OPTIONS,
+  "regional-resource": REGIONAL_OPTIONS,
+  itad: ITAD_OPTIONS,
+  "digital-website": DIGITAL_WEBSITE_OPTIONS,
+  "partnership-other": new Set<string>(),
+};
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function csvSet(value: string): Set<string> {
@@ -124,6 +158,18 @@ function cleanString(
   return cleaned;
 }
 
+function cleanBoolean(
+  value: unknown,
+  field: string,
+  required = false,
+): boolean {
+  if (typeof value !== "boolean") {
+    throw new Error(`${field} must be a boolean`);
+  }
+  if (required && !value) throw new Error(`${field} is required`);
+  return value;
+}
+
 function parsePayload(input: unknown): InquiryPayload {
   if (!input || typeof input !== "object" || Array.isArray(input)) {
     throw new Error("Request body must be an object");
@@ -153,12 +199,28 @@ function parsePayload(input: unknown): InquiryPayload {
     3_000,
   );
   const submittedAt = cleanString(value.submittedAt, "submittedAt", 40, true);
+  const consentGiven = cleanBoolean(value.consentGiven, "consentGiven", true);
+  const consentVersion = cleanString(
+    value.consentVersion,
+    "consentVersion",
+    40,
+    true,
+  );
+  const consentAt = cleanString(value.consentAt, "consentAt", 40, true);
   const turnstileToken = cleanString(
     value.turnstileToken,
     "turnstileToken",
     2_048,
     true,
   );
+
+  if (pathway === "partnership-other") {
+    if (!partnershipDetail) {
+      throw new Error("partnershipDetail is required for this pathway");
+    }
+  } else if (!PATHWAY_OPTIONS[pathway]) {
+    throw new Error("pathway is invalid");
+  }
 
   if (!EMAIL_PATTERN.test(email)) throw new Error("email is invalid");
   if (!BUDGET_RANGES.has(budgetRange)) throw new Error("budgetRange is invalid");
@@ -168,16 +230,14 @@ function parsePayload(input: unknown): InquiryPayload {
   if (Number.isNaN(Date.parse(submittedAt))) {
     throw new Error("submittedAt is invalid");
   }
+  if (Number.isNaN(Date.parse(consentAt))) {
+    throw new Error("consentAt is invalid");
+  }
   if (!Array.isArray(value.pathwayOptions) || value.pathwayOptions.length > 10) {
     throw new Error("pathwayOptions is invalid");
   }
 
-  const allowedOptions =
-    pathway === "ai-infrastructure"
-      ? AI_OPTIONS
-      : pathway === "regional-resource"
-        ? REGIONAL_OPTIONS
-        : new Set<string>();
+  const allowedOptions = PATHWAY_OPTIONS[pathway] ?? new Set<string>();
   const pathwayOptions = value.pathwayOptions.map((item) => {
     const option = cleanString(item, "pathwayOptions", 100, true);
     if (!allowedOptions.has(option)) throw new Error("pathwayOptions is invalid");
@@ -196,6 +256,9 @@ function parsePayload(input: unknown): InquiryPayload {
     timeline,
     additionalRequirements,
     submittedAt,
+    consentGiven,
+    consentVersion,
+    consentAt,
     turnstileToken,
   };
 }
@@ -245,6 +308,8 @@ function label(value: string): string {
   const labels: Record<string, string> = {
     "ai-infrastructure": "AI Infrastructure Delivery",
     "regional-resource": "Regional Resource Integration",
+    itad: "IT Assets Disposition (ITAD)",
+    "digital-website": "AI Website Design & Development",
     "partnership-other": "Partnership / Other",
     "below-250k": "Below RM250k",
     "250k-1m": "RM250k–RM1m",
@@ -280,6 +345,10 @@ function emailContent(payload: InquiryPayload): { subject: string; html: string;
     ["Expected timeline", label(payload.timeline)],
     ["Additional requirements", payload.additionalRequirements],
     ["Submitted at (UTC)", payload.submittedAt],
+    [
+      "Privacy consent",
+      `${payload.consentGiven ? "Given" : "Not given"} — notice version ${payload.consentVersion}, recorded ${payload.consentAt}`,
+    ],
   ];
 
   const html = `<!doctype html><html><body style="font-family:Arial,sans-serif;color:#111827"><h2>New website enquiry</h2><table role="presentation" style="border-collapse:collapse;width:100%;max-width:760px">${fields.map(([title, value]) => row(title, value)).join("")}</table><p style="color:#6b7280;font-size:12px">Submitted via auramind.cloud. Replying to this email will reply to the enquirer.</p></body></html>`;
