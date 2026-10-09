@@ -19,7 +19,7 @@ const chakraPetch = Chakra_Petch({
 export const metadata: Metadata = {
   title: "Auramind — AI Infrastructure, Delivered Across Southeast Asia",
   description:
-    "Malaysia-based AI infrastructure delivery partner serving Southeast Asia. Infrastructure planning, procurement, deployment and managed operations, regional resource integration, IT asset disposition (ITAD) and AI website delivery.",
+    "Malaysia-based AI infrastructure delivery partner serving Southeast Asia. Infrastructure planning, procurement, deployment and managed operations, regional resource integration, ITAD product resale and AI website delivery.",
 };
 
 export default function RootLayout({
