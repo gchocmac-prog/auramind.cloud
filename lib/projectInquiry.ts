@@ -46,9 +46,9 @@ export const PATHWAYS: {
   },
   {
     id: "itad",
-    title: "IT Assets Disposition (ITAD)",
+    title: "ITAD Product Resale",
     description:
-      "For IT, security, finance and ESG teams retiring IT assets.",
+      "For IT, security, finance and ESG teams seeking ITAD products.",
   },
   {
     id: "digital-website",
@@ -80,12 +80,12 @@ export const REGIONAL_RESOURCE_OPTIONS = [
 ] as const;
 
 export const ITAD_OPTIONS = [
-  "Asset inventory and audit",
-  "Certified data sanitisation",
-  "Refurbishment and remarketing",
-  "Compliant recycling and disposal",
+  "ITAD product selection and licensing",
+  "Certified data erasure software",
+  "Asset disposition and audit platforms",
   "Certificates and audit trail",
-  "Chain-of-custody coordination",
+  "Procurement and supply coordination",
+  "Local delivery and support",
 ] as const;
 
 export const DIGITAL_WEBSITE_OPTIONS = [
