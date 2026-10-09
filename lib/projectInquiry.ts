@@ -25,6 +25,8 @@ export const TIMELINES = [
 export type PathwayId =
   | "ai-infrastructure"
   | "regional-resource"
+  | "itad"
+  | "digital-website"
   | "partnership-other";
 
 export const PATHWAYS: {
@@ -43,10 +45,21 @@ export const PATHWAYS: {
     description: "For investors, operators and project stakeholders.",
   },
   {
+    id: "itad",
+    title: "IT Assets Disposition (ITAD)",
+    description:
+      "For IT, security, finance and ESG teams retiring IT assets.",
+  },
+  {
+    id: "digital-website",
+    title: "AI Website Design & Development",
+    description: "For businesses that need a digital presence that performs.",
+  },
+  {
     id: "partnership-other",
     title: "Partnership / Other",
     description:
-      "For partnerships, suppliers or enquiries that do not fit the first two paths.",
+      "For partnerships, suppliers or enquiries that do not fit the other paths.",
   },
 ];
 
@@ -66,6 +79,36 @@ export const REGIONAL_RESOURCE_OPTIONS = [
   "Early opportunity structuring",
 ] as const;
 
+export const ITAD_OPTIONS = [
+  "Asset inventory and audit",
+  "Certified data sanitisation",
+  "Refurbishment and remarketing",
+  "Compliant recycling and disposal",
+  "Certificates and audit trail",
+  "Chain-of-custody coordination",
+] as const;
+
+export const DIGITAL_WEBSITE_OPTIONS = [
+  "UX/UI and responsive design",
+  "AI customer assistant",
+  "Intelligent search",
+  "SEO, analytics and Core Web Vitals",
+  "PDPA-aligned data handling",
+  "Managed deployment and optimisation",
+] as const;
+
+/**
+ * Engagement-model chips offered for each pathway.
+ * The Worker mirrors this mapping; keep both in sync when editing.
+ */
+export const PATHWAY_OPTIONS: Record<PathwayId, readonly string[]> = {
+  "ai-infrastructure": AI_INFRASTRUCTURE_OPTIONS,
+  "regional-resource": REGIONAL_RESOURCE_OPTIONS,
+  itad: ITAD_OPTIONS,
+  "digital-website": DIGITAL_WEBSITE_OPTIONS,
+  "partnership-other": [],
+};
+
 /**
  * Stable payload contract for Google Sheets, email, or CRM integrations.
  * Keep field names stable when wiring a production endpoint.
@@ -82,8 +125,21 @@ export type ProjectInquiryPayload = {
   timeline: string;
   additionalRequirements: string;
   submittedAt: string;
+  /** Visitor acknowledged the privacy notice (PDPA consent). */
+  consentGiven: boolean;
+  /** Privacy notice version shown at the point of consent. */
+  consentVersion: string;
+  /** ISO timestamp marking when consent was recorded on the client. */
+  consentAt: string;
   turnstileToken: string;
 };
+
+/**
+ * Version of the privacy notice the form links to. Bump this whenever the
+ * notice materially changes so stored consents remain attributable.
+ */
+export const PRIVACY_NOTICE_VERSION = "2026-10-09";
+export const PRIVACY_NOTICE_PATH = "/privacy";
 
 /**
  * Optional public endpoint for production form delivery.
