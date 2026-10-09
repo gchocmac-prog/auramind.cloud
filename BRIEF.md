@@ -58,9 +58,25 @@ Auramind is execution-led, vendor-neutral and regionally connected.
 
 \- Early opportunity structuring
 
+3\. IT Assets Disposition (ITAD)
+
+\- Asset inventory and audit
+
+\- Certified data sanitisation
+
+\- Refurbishment and remarketing
+
+\- Compliant recycling and disposal
+
+\- Certificates and audit trail
+
+\- Chain-of-custody coordination
+
 
 
 Do not advertise GPU rental unless confirmed later.
+
+Do not publish ITAD claims still pending evidence. Standard numbers, certifications, partner or facility names, and recovery figures are gated behind `docs/ITAD-CLAIMS.md`.
 
 
 
