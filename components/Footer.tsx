@@ -8,6 +8,8 @@ const footerLinks = [
   { href: "#project-inquiry", label: "Contact" },
 ];
 
+const legalLinks = [{ href: "/privacy", label: "Privacy Notice" }];
+
 export function Footer() {
   return (
     <footer className="border-t border-auramind-black/10 bg-auramind-secondary">
@@ -27,6 +29,15 @@ export function Footer() {
 
         <nav aria-label="Footer" className="flex flex-wrap gap-x-8 gap-y-3">
           {footerLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-auramind-black/70 transition-colors hover:text-auramind-black"
+            >
+              {link.label}
+            </Link>
+          ))}
+          {legalLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}

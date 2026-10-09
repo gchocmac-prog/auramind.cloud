@@ -10,10 +10,11 @@ import {
 } from "react";
 import Script from "next/script";
 import {
-  AI_INFRASTRUCTURE_OPTIONS,
   BUDGET_RANGES,
   PATHWAYS,
-  REGIONAL_RESOURCE_OPTIONS,
+  PATHWAY_OPTIONS,
+  PRIVACY_NOTICE_PATH,
+  PRIVACY_NOTICE_VERSION,
   TIMELINES,
   TURNSTILE_SITE_KEY,
   isProjectInquiryConfigured,
@@ -55,6 +56,7 @@ type FormState = {
   projectBrief: string;
   timeline: string;
   additionalRequirements: string;
+  consentGiven: boolean;
 };
 
 type FieldErrors = Partial<Record<keyof FormState, string>>;
@@ -70,6 +72,7 @@ const INITIAL: FormState = {
   projectBrief: "",
   timeline: "",
   additionalRequirements: "",
+  consentGiven: false,
 };
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -92,6 +95,11 @@ function validate(values: FormState): FieldErrors {
     errors.projectBrief = "Please share a short project summary.";
   } else if (values.projectBrief.trim().length < 12) {
     errors.projectBrief = "Add a little more detail to your summary.";
+  }
+
+  if (!values.consentGiven) {
+    errors.consentGiven =
+      "Please acknowledge the privacy notice before submitting.";
   }
 
   return errors;
@@ -194,7 +202,9 @@ function TurnstileWidget({
 export function ProjectInquiryForm() {
   const formId = useId();
   const [values, setValues] = useState<FormState>(INITIAL);
-  const [errors, setErrors] = useState<FieldErrors>({});
+  const [errors, setErrors] = useState<FieldErrors>({
+    consentGiven: undefined,
+  });
   const [submitted, setSubmitted] = useState(false);
   const [pending, setPending] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -267,6 +277,9 @@ export function ProjectInquiryForm() {
       timeline: values.timeline,
       additionalRequirements: values.additionalRequirements.trim(),
       submittedAt: new Date().toISOString(),
+      consentGiven: values.consentGiven,
+      consentVersion: PRIVACY_NOTICE_VERSION,
+      consentAt: new Date().toISOString(),
       turnstileToken,
     };
 
@@ -305,12 +318,9 @@ export function ProjectInquiryForm() {
     );
   }
 
-  const secondaryOptions =
-    values.pathway === "ai-infrastructure"
-      ? AI_INFRASTRUCTURE_OPTIONS
-      : values.pathway === "regional-resource"
-        ? REGIONAL_RESOURCE_OPTIONS
-        : null;
+  const secondaryOptions = values.pathway
+    ? PATHWAY_OPTIONS[values.pathway]
+    : null;
 
   return (
     <form
@@ -548,6 +558,51 @@ export function ProjectInquiryForm() {
           placeholder="Constraints, stakeholders, locations or other context."
         />
       </Field>
+
+      <div className="inquiry-consent">
+        <label className="inquiry-consent__row" htmlFor={`${formId}-consent`}>
+          <input
+            id={`${formId}-consent`}
+            name="consentGiven"
+            type="checkbox"
+            className="inquiry-consent__box"
+            checked={values.consentGiven}
+            onChange={(event) => {
+              setField("consentGiven", event.target.checked);
+              setErrors((prev) => {
+                const next = { ...prev };
+                delete next.consentGiven;
+                return next;
+              });
+            }}
+            aria-invalid={Boolean(errors.consentGiven)}
+            aria-describedby={
+              errors.consentGiven ? `${formId}-consent-error` : undefined
+            }
+          />
+          <span className="inquiry-consent__copy">
+            I have read and acknowledge the{" "}
+            <a
+              className="inquiry-consent__link"
+              href={PRIVACY_NOTICE_PATH}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Privacy Notice
+            </a>{" "}
+            and consent to Auramind using my details to respond to this enquiry.
+          </span>
+        </label>
+        {errors.consentGiven ? (
+          <p
+            id={`${formId}-consent-error`}
+            className="inquiry-error"
+            role="alert"
+          >
+            {errors.consentGiven}
+          </p>
+        ) : null}
+      </div>
 
       {submitError ? (
         <p className="inquiry-error" role="alert">
