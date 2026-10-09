@@ -5,11 +5,14 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
 
+// Root-relative so these also work from other routes (e.g. /privacy). A bare
+// "#services" only scrolls within the current page, so on /privacy it did
+// nothing. "/#services" is still a same-page jump when already on "/".
 const navLinks = [
-  { href: "#services", label: "Services" },
-  { href: "#how-we-work", label: "How We Work" },
-  { href: "#about", label: "About" },
-  { href: "#project-inquiry", label: "Contact" },
+  { href: "/#services", label: "Services" },
+  { href: "/#how-we-work", label: "How We Work" },
+  { href: "/#about", label: "About" },
+  { href: "/#project-inquiry", label: "Contact" },
 ];
 
 export function Header() {
@@ -79,7 +82,7 @@ export function Header() {
     >
       <div className="mx-auto flex h-16 w-full max-w-[var(--container)] items-center justify-between gap-6 px-5 sm:h-[4.5rem] sm:px-8 lg:px-10">
         <Link
-          href="#top"
+          href="/#top"
           className={`relative z-[61] flex shrink-0 items-center gap-2.5 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 ${
             onDark
               ? "focus-visible:outline-white"
@@ -114,7 +117,7 @@ export function Header() {
             ))}
           </nav>
           <Button
-            href="#project-inquiry"
+            href="/#project-inquiry"
             variant={onDark ? "light" : "primary"}
             className="px-5 py-2.5"
           >
@@ -176,7 +179,7 @@ export function Header() {
             </Link>
           ))}
           <div className="mt-2 px-3 pb-2">
-            <Button href="#project-inquiry" variant="primary" className="w-full">
+            <Button href="/#project-inquiry" variant="primary" className="w-full">
               Discuss a Project
             </Button>
           </div>
