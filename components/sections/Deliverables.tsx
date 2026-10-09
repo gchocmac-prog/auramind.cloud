@@ -22,6 +22,10 @@ const deliverables = [
     title: "Opportunity pack",
     copy: "Early structuring materials for regional sites, resources and project options.",
   },
+  {
+    title: "Disposition record",
+    copy: "Asset-level documentation covering inventory, sanitisation and final disposal.",
+  },
 ];
 
 export function Deliverables() {
