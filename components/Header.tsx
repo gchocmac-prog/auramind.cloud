@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
 import { Logo } from "@/components/Logo";
@@ -18,8 +19,17 @@ const navLinks = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [overHero, setOverHero] = useState(true);
+  const pathname = usePathname();
+  // The transparent treatment only makes sense over the home page hero. On any
+  // other route (e.g. /privacy) there is no hero to sit on, so force the solid
+  // bar. Note: middle-click / open-in-new-tab may keep this component mounted
+  // across a client-side navigation, hence a route check rather than a
+  // mount-time flag.
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
+    if (!isHomePage) return;
+
     const update = () => {
       const narrative = document.querySelector(".hero-narrative");
       const hero = document.getElementById("top");
@@ -59,7 +69,7 @@ export function Header() {
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
     };
-  }, []);
+  }, [isHomePage]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -68,7 +78,8 @@ export function Header() {
     };
   }, [open]);
 
-  const onDark = overHero && !open;
+  // Never go transparent off the home page, even before the effect has run.
+  const onDark = isHomePage && overHero && !open;
 
   return (
     <header
